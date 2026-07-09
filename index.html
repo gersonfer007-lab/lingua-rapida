@@ -1,0 +1,2308 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1E1B4B">
+<title>Lingua Rapida â€” Aprenda idiomas em 15 minutos</title>
+<meta name="description" content="O metodo 80/20 para aprender qualquer idioma. Domine as 500 palavras essenciais para conversacao rapida.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  /* ========= RESET & BASE ========= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  img, svg { display: block; max-width: 100%; }
+
+  /* ========= DESIGN TOKENS ========= */
+  :root {
+    --ink: #1E1B4B;
+    --ink-2: #312E81;
+    --purple: #7C3AED;
+    --purple-2: #6D28D9;
+    --purple-3: #5B21B6;
+    --cyan: #06B6D4;
+    --cyan-light: #67E8F9;
+    --rose: #F43F5E;
+    --sky: #EDE9FE;
+    --sky-2: #DDD6FE;
+    --paper: #FAF5FF;
+    --paper-2: #FFFFFF;
+    --line: rgba(124, 58, 237, 0.08);
+    --line-strong: rgba(124, 58, 237, 0.18);
+    --muted: #6B7280;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --ff-serif: 'Instrument Serif', Georgia, serif;
+    --ff-sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 20px;
+    --radius-sm: 14px;
+    --radius-lg: 28px;
+    --shadow-1: 0 1px 3px rgba(124,58,237,.06), 0 4px 12px rgba(124,58,237,.06);
+    --shadow-2: 0 2px 6px rgba(124,58,237,.08), 0 12px 32px rgba(124,58,237,.1);
+    --shadow-3: 0 4px 10px rgba(124,58,237,.1), 0 24px 48px rgba(124,58,237,.15);
+    --shadow-glow: 0 0 30px rgba(124,58,237,.2), 0 0 60px rgba(6,182,212,.1);
+  }
+
+  /* ========= BODY ========= */
+  body {
+    font-family: var(--ff-sans);
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    line-height: 1.5;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Animated gradient mesh background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 20%, rgba(124,58,237,.07) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 90% 80%, rgba(6,182,212,.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(244,63,94,.04) 0%, transparent 50%);
+    animation: meshFloat 20s ease-in-out infinite alternate;
+  }
+  @keyframes meshFloat {
+    0% { opacity: 1; }
+    50% { opacity: .7; }
+    100% { opacity: 1; }
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -30vh; right: -20vw;
+    width: 80vw; height: 80vw;
+    background: radial-gradient(circle, rgba(124,58,237,.06) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ========= LAYOUT ========= */
+  .app {
+    position: relative;
+    z-index: 2;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 0 20px 120px;
+  }
+
+  /* ========= HEADER ========= */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0 18px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: rgba(250, 245, 255, .75);
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    letter-spacing: -.02em;
+  }
+  .logo-mark {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--ink);
+  }
+  .logo-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    border-radius: 50%;
+    margin-left: 2px;
+    margin-bottom: 6px;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: .7; }
+  }
+  .avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: -.01em;
+    box-shadow: 0 4px 15px rgba(124,58,237,.25);
+    border: 2px solid var(--paper);
+    outline: 1px solid var(--line);
+  }
+
+  /* ========= AI TUTOR SECTION ========= */
+  .ai-tutor {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(124,58,237,.06), rgba(6,182,212,.04));
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-tutor::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -30%;
+    width: 60%; height: 200%;
+    background: radial-gradient(circle, rgba(6,182,212,.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* ========= AI FACE ========= */
+  .ai-face-wrap {
+    position: relative;
+    flex-shrink: 0;
+    width: 80px; height: 80px;
+  }
+  .ai-face-wrap.small {
+    width: 44px; height: 44px;
+  }
+  .ai-face-ring {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--purple), var(--cyan), var(--rose), var(--purple));
+    animation: ringRotate 6s linear infinite;
+    opacity: .7;
+  }
+  .ai-face-wrap.speaking .ai-face-ring {
+    opacity: 1;
+    animation: ringRotate 3s linear infinite;
+  }
+  @keyframes ringRotate {
+    to { transform: rotate(360deg); }
+  }
+  .ai-face-inner {
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--paper-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: inset 0 2px 8px rgba(124,58,237,.08);
+  }
+  .ai-face-svg {
+    width: 85%;
+    height: 85%;
+  }
+  .ai-face-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  /* AI Face SVG animations */
+  .ai-eyes-blink {
+    animation: blink 4s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.05); }
+  }
+  .ai-mouth-talk {
+    transform-origin: center;
+    animation: talk 0.6s ease-in-out infinite alternate;
+  }
+  .ai-face-wrap:not(.speaking) .ai-mouth-talk {
+    animation: none;
+  }
+  @keyframes talk {
+    0% { transform: scaleY(0.4); }
+    100% { transform: scaleY(1.2); }
+  }
+
+  /* Sound waves around face */
+  .ai-waves {
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2px;
+    align-items: flex-end;
+    height: 14px;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .ai-face-wrap.speaking .ai-waves { opacity: 1; }
+  .ai-face-wrap.small .ai-waves { height: 10px; gap: 1.5px; }
+  .ai-wave {
+    width: 3px;
+    background: linear-gradient(to top, var(--purple), var(--cyan));
+    border-radius: 2px;
+    animation: wave 0.8s ease-in-out infinite alternate;
+  }
+  .ai-face-wrap.small .ai-wave { width: 2px; }
+  .ai-wave:nth-child(1) { height: 40%; animation-delay: 0s; }
+  .ai-wave:nth-child(2) { height: 70%; animation-delay: 0.15s; }
+  .ai-wave:nth-child(3) { height: 100%; animation-delay: 0.3s; }
+  .ai-wave:nth-child(4) { height: 55%; animation-delay: 0.45s; }
+  .ai-wave:nth-child(5) { height: 80%; animation-delay: 0.1s; }
+  @keyframes wave {
+    0% { transform: scaleY(0.3); }
+    100% { transform: scaleY(1); }
+  }
+
+  /* AI Status dot */
+  .ai-status {
+    position: absolute;
+    bottom: 2px; right: 2px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--success);
+    border: 2.5px solid var(--paper-2);
+    box-shadow: 0 0 8px var(--success);
+    z-index: 5;
+  }
+  .ai-face-wrap.small .ai-status {
+    width: 10px; height: 10px;
+    bottom: 0; right: 0;
+    border-width: 2px;
+  }
+
+  .ai-tutor-info {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .ai-tutor-name {
+    font-family: var(--ff-serif);
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .ai-tutor-name em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .ai-tutor-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .ai-tutor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    padding: 3px 10px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    border-radius: 999px;
+  }
+
+  /* ========= HERO GREETING ========= */
+  .hero {
+    padding: 20px 0 28px;
+  }
+  .hero-greet {
+    font-family: var(--ff-sans);
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: -.01em;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-family: var(--ff-serif);
+    font-weight: 400;
+    font-size: clamp(38px, 11vw, 52px);
+    line-height: .98;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .hero-title em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-foreign {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--muted);
+    margin-top: 4px;
+    transition: opacity .3s ease;
+  }
+
+  /* ========= STATS ROW ========= */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 0 0 32px;
+  }
+  .stat {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 14px 12px;
+    text-align: center;
+    box-shadow: var(--shadow-1);
+    transition: all .25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,.03), rgba(6,182,212,.03));
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .stat:hover::before { opacity: 1; }
+  .stat:active { transform: scale(.97); }
+  .stat-num {
+    font-family: var(--ff-serif);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+  }
+  .stat.streak .stat-num { color: var(--warning); }
+
+  /* ========= SECAO ========= */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding: 0 2px;
+  }
+  .section-title {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -.01em;
+  }
+  .section-link {
+    font-size: 13px;
+    color: var(--purple);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  /* ========= SELETOR DE IDIOMAS ========= */
+  .langs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .langs::-webkit-scrollbar { display: none; }
+  .lang {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px 12px 12px;
+    background: var(--paper-2);
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    transition: all .25s ease;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .lang:hover { border-color: var(--line-strong); box-shadow: var(--shadow-1); }
+  .lang.active {
+    background: linear-gradient(135deg, var(--purple), var(--purple-2));
+    color: white;
+    border-color: var(--purple);
+    box-shadow: 0 6px 24px rgba(124,58,237,.25);
+    transform: translateY(-1px);
+  }
+  .flag {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    background: var(--sky);
+    overflow: hidden;
+  }
+  .lang.active .flag { background: rgba(255,255,255,.2); }
+
+  /* ========= MISSAO DO DIA ========= */
+  .mission {
+    position: relative;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--purple-3) 50%, var(--ink-2) 100%);
+    border-radius: var(--radius-lg);
+    padding: 26px;
+    color: white;
+    overflow: hidden;
+    box-shadow: var(--shadow-3), 0 0 40px rgba(124,58,237,.15);
+  }
+  .mission::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 80%; height: 200%;
+    background: radial-gradient(circle, rgba(6,182,212,.3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .mission::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.15'/></svg>");
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+  .mission-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .mission-tag {
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(255,255,255,.7);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mission-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cyan-light);
+    box-shadow: 0 0 8px var(--cyan);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .mission-xp {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,.6);
+  }
+  .mission-icon {
+    position: absolute;
+    z-index: 1;
+    font-size: 52px;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,.3));
+    opacity: .95;
+  }
+  .mission-title {
+    position: relative;
+    z-index: 1;
+    font-family: var(--ff-serif);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    margin-bottom: 8px;
+    padding-right: 60px;
+  }
+  .mission-title em {
+    font-style: italic;
+    color: var(--cyan-light);
+  }
+  .mission-sub {
+    position: relative;
+    z-index: 1;
+    font-size: 13px;
+    color: rgba(255,255,255,.7);
+    margin-bottom: 20px;
+  }
+  .progress-wrap {
+    position: relative;
+    z-index: 1;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .progress-track {
+    height: 8px;
+    background: rgba(255,255,255,.12);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--cyan-light));
+    border-radius: 999px;
+    width: 0%;
+    transition: width .6s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    box-shadow: 0 0 12px rgba(6,182,212,.5);
+  }
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+    animation: shine 2s linear infinite;
+  }
+  @keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* ========= DIALOGO ========= */
+  .dialog {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .dialog::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan), var(--rose));
+  }
+  .dialog-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px dashed var(--line-strong);
+  }
+  .dialog-persona {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .persona-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    box-shadow: 0 3px 12px rgba(124,58,237,.2);
+  }
+  .persona-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .persona-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .persona-role {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .03em;
+  }
+  .dialog-counter {
+    font-family: var(--ff-serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .dialog-counter strong {
+    color: var(--purple);
+    font-style: normal;
+    font-family: var(--ff-sans);
+  }
+
+  .phrases {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+    max-height: 380px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) transparent;
+    padding-right: 4px;
+  }
+  .phrases::-webkit-scrollbar { width: 4px; }
+  .phrases::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 2px; }
+
+  .phrase {
+    background: var(--sky);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all .25s ease;
+    position: relative;
+    border: 1.5px solid transparent;
+    overflow: hidden;
+  }
+  .phrase::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,.04), rgba(6,182,212,.04));
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .phrase:hover::before { opacity: 1; }
+  .phrase:hover {
+    background: var(--sky-2);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-1);
+  }
+  .phrase:active { transform: scale(.99); }
+  .phrase.revealed {
+    background: var(--paper-2);
+    border-color: var(--line-strong);
+  }
+  .phrase-foreign {
+    font-family: var(--ff-serif);
+    font-size: 18px;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 2px;
+    letter-spacing: -.005em;
+    position: relative;
+  }
+  .phrase-native {
+    font-size: 13px;
+    color: var(--purple);
+    font-weight: 500;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all .35s cubic-bezier(.4,0,.2,1);
+    margin-top: 0;
+    position: relative;
+  }
+  .phrase.revealed .phrase-native {
+    max-height: 40px;
+    opacity: 1;
+    margin-top: 6px;
+  }
+  .phrase-hint {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: .6;
+  }
+  .phrase.revealed .phrase-hint {
+    opacity: 0;
+  }
+  .phrase-check {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--success), #34D399);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    opacity: 0;
+    transform: scale(0);
+    transition: all .3s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 2px 8px rgba(16,185,129,.3);
+  }
+  .phrase.revealed .phrase-check {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .dialog-cta {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, var(--purple), var(--purple-2));
+    color: white;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .01em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all .25s ease;
+    box-shadow: 0 4px 16px rgba(124,58,237,.25);
+  }
+  .dialog-cta:hover {
+    background: linear-gradient(135deg, var(--purple-2), var(--purple-3));
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(124,58,237,.3);
+  }
+  .dialog-cta:active { transform: scale(.98); }
+  .dialog-cta.done {
+    background: linear-gradient(135deg, var(--success), #34D399);
+    box-shadow: 0 4px 16px rgba(16,185,129,.25);
+  }
+  .dialog-cta svg {
+    width: 16px; height: 16px;
+    transition: transform .2s ease;
+  }
+  .dialog-cta:hover svg { transform: translateX(3px); }
+
+  /* ========= BOTTOM SHEET ========= */
+  .bottom {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 30;
+    padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+    background: rgba(250, 245, 255, .92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+  }
+  .bottom-inner {
+    max-width: 460px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .bottom-info {
+    flex: 1;
+  }
+  .bottom-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .bottom-sub {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .bottom-btn {
+    padding: 12px 22px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    color: white;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all .25s ease;
+    box-shadow: 0 4px 16px rgba(124,58,237,.2);
+  }
+  .bottom-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(124,58,237,.3);
+  }
+
+  /* ========= TOAST ========= */
+  .toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: linear-gradient(135deg, var(--ink), var(--purple-3));
+    color: white;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--shadow-3);
+    opacity: 0;
+    transition: all .3s ease;
+    z-index: 50;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ========= ANIMATIONS ========= */
+  .fade-in {
+    animation: fadeIn .6s cubic-bezier(.4,0,.2,1) both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .stagger > * { animation: fadeIn .5s cubic-bezier(.4,0,.2,1) both; }
+  .stagger > *:nth-child(1) { animation-delay: .05s; }
+  .stagger > *:nth-child(2) { animation-delay: .1s; }
+  .stagger > *:nth-child(3) { animation-delay: .15s; }
+  .stagger > *:nth-child(4) { animation-delay: .2s; }
+  .stagger > *:nth-child(5) { animation-delay: .25s; }
+  .stagger > *:nth-child(6) { animation-delay: .3s; }
+  .stagger > *:nth-child(7) { animation-delay: .35s; }
+  .stagger > *:nth-child(8) { animation-delay: .4s; }
+
+  /* ========= MISSION TABS ========= */
+  .mission-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    margin: 0 -20px 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    scrollbar-width: none;
+  }
+  .mission-tabs::-webkit-scrollbar { display: none; }
+  .mission-tab {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--paper-2);
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    transition: all .2s ease;
+    cursor: pointer;
+  }
+  .mission-tab:hover { border-color: var(--line-strong); }
+  .mission-tab.active {
+    background: var(--sky);
+    border-color: var(--purple);
+    color: var(--purple);
+    font-weight: 600;
+  }
+  .mission-tab-emoji { font-size: 16px; }
+  .mission-tab-done {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--success);
+    color: white;
+    font-size: 9px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .mission-tab.completed .mission-tab-done { display: flex; }
+
+  /* ========= BADGES & ACHIEVEMENTS ========= */
+  .badges-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .badge-card {
+    background: var(--paper-2);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: var(--shadow-1);
+    transition: all .35s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .badge-card.locked {
+    opacity: .45;
+    filter: grayscale(1);
+  }
+  .badge-card.locked .badge-icon {
+    filter: blur(1px);
+  }
+  .badge-card.unlocked {
+    border-color: var(--line-strong);
+    opacity: 1;
+    filter: none;
+  }
+  .badge-card.unlocked::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,.04), rgba(6,182,212,.04));
+    pointer-events: none;
+  }
+  .badge-card.just-earned {
+    animation: badgeUnlock .8s cubic-bezier(.34,1.56,.64,1);
+    border-color: var(--purple);
+    box-shadow: var(--shadow-glow);
+  }
+  @keyframes badgeUnlock {
+    0% { transform: scale(.8) rotate(-5deg); opacity: 0; }
+    50% { transform: scale(1.08) rotate(2deg); }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+  }
+  .badge-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+    display: block;
+    transition: transform .3s ease;
+  }
+  .badge-card.unlocked:hover .badge-icon {
+    transform: scale(1.15) rotate(-5deg);
+  }
+  .badge-name {
+    font-family: var(--ff-serif);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 3px;
+    line-height: 1.2;
+  }
+  .badge-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .badge-card .badge-lock-icon {
+    position: absolute;
+    top: 8px; right: 8px;
+    font-size: 12px;
+    opacity: .5;
+  }
+  .badge-card.unlocked .badge-lock-icon {
+    display: none;
+  }
+  .badge-check-icon {
+    position: absolute;
+    top: 8px; right: 8px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--success), #34D399);
+    color: white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    box-shadow: 0 2px 6px rgba(16,185,129,.3);
+  }
+  .badge-card.unlocked .badge-check-icon {
+    display: flex;
+  }
+  .badge-progress-bar {
+    margin-top: 8px;
+    height: 4px;
+    background: var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .badge-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    border-radius: 999px;
+    transition: width .5s ease;
+  }
+  .badge-card.unlocked .badge-progress-bar { display: none; }
+  .badges-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: linear-gradient(135deg, rgba(124,58,237,.06), rgba(6,182,212,.04));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .badges-summary-count {
+    font-family: var(--ff-serif);
+    font-size: 20px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Badge unlock overlay */
+  .badge-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30,27,75,.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  .badge-overlay.show {
+    display: flex;
+    opacity: 1;
+  }
+  .badge-overlay-card {
+    background: var(--paper-2);
+    border-radius: var(--radius-lg);
+    padding: 36px 32px;
+    text-align: center;
+    max-width: 300px;
+    width: 90%;
+    box-shadow: var(--shadow-3), var(--shadow-glow);
+    animation: overlayPop .5s cubic-bezier(.34,1.56,.64,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .badge-overlay-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan), var(--rose), var(--purple));
+    background-size: 300% 100%;
+    animation: gradientSlide 3s linear infinite;
+  }
+  @keyframes gradientSlide {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 300% 0%; }
+  }
+  @keyframes overlayPop {
+    0% { transform: scale(.5) translateY(40px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+  }
+  .badge-overlay-tag {
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .badge-overlay-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    display: block;
+    animation: iconBounce 1s ease-in-out;
+  }
+  @keyframes iconBounce {
+    0%, 100% { transform: scale(1); }
+    30% { transform: scale(1.3) rotate(-10deg); }
+    60% { transform: scale(1.1) rotate(5deg); }
+  }
+  .badge-overlay-name {
+    font-family: var(--ff-serif);
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .badge-overlay-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  .badge-overlay-btn {
+    padding: 12px 32px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    color: white;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 16px rgba(124,58,237,.25);
+    transition: all .2s ease;
+  }
+  .badge-overlay-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(124,58,237,.35);
+  }
+
+  /* Confetti particles */
+  .confetti {
+    position: fixed;
+    top: -10px;
+    width: 10px; height: 10px;
+    z-index: 101;
+    pointer-events: none;
+    animation: confettiFall 3s linear forwards;
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ========= RESPONSIVE â€” MOBILE FIRST ========= */
+
+  /* Telas muito pequenas (iPhone SE, Galaxy A) */
+  @media (max-width: 374px) {
+    .app { padding: 0 14px 110px; }
+    .header { margin: 0 -14px; padding: 16px 14px 12px; }
+    .hero-title { font-size: 32px; }
+    .hero-foreign { font-size: 15px; }
+    .ai-tutor { padding: 14px; gap: 12px; }
+    .ai-face-wrap { width: 60px; height: 60px; }
+    .ai-tutor-name { font-size: 17px; }
+    .ai-tutor-desc { font-size: 12px; }
+    .stat { padding: 10px 8px; }
+    .stat-num { font-size: 22px; }
+    .stat-label { font-size: 10px; }
+    .badges-grid { gap: 8px; }
+    .badge-card { padding: 12px 10px; }
+    .badge-icon { font-size: 28px; margin-bottom: 6px; }
+    .badge-name { font-size: 13px; }
+    .badge-desc { font-size: 10px; }
+    .mission { padding: 18px; border-radius: var(--radius); }
+    .mission-title { font-size: 22px; }
+    .mission-icon { font-size: 40px; }
+    .phrase { padding: 12px 14px; }
+    .phrase-foreign { font-size: 16px; }
+    .section-title { font-size: 19px; }
+    .bottom-btn { padding: 10px 16px; font-size: 12px; }
+  }
+
+  /* Celulares padrao (375-430px) */
+  @media (max-width: 430px) {
+    .app { padding: 0 16px 110px; }
+    .header { margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
+    .hero { padding: 14px 0 20px; }
+    .hero-greet { font-size: 14px; }
+    .ai-tutor { margin-bottom: 20px; }
+    .stats { gap: 8px; margin-bottom: 24px; }
+    .section { margin-bottom: 22px; }
+    .langs { margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
+    .mission-tabs { margin: 0 -16px 14px; padding-left: 16px; padding-right: 16px; }
+    .dialog { padding: 16px; }
+    .dialog-cta { padding: 14px; }
+    .badge-overlay-card { padding: 28px 24px; }
+    .badge-overlay-icon { font-size: 52px; }
+    .badge-overlay-name { font-size: 20px; }
+    .badge-overlay-desc { font-size: 13px; }
+    .bottom { padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
+  }
+
+  /* Tablets e desktop */
+  @media (min-width: 500px) {
+    .app { padding: 0 32px 120px; }
+    .header { margin: 0 -32px; padding-left: 32px; padding-right: 32px; }
+    .badges-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* Telas baixas (landscape no celular) */
+  @media (max-height: 700px) {
+    .hero { padding: 6px 0 12px; }
+    .hero-title { font-size: 30px; }
+    .stats { margin: 12px 0 18px; }
+    .ai-tutor { padding: 12px; margin-bottom: 16px; }
+    .section { margin-bottom: 16px; }
+  }
+
+  /* Touch targets minimos (44px) */
+  @media (pointer: coarse) {
+    .lang { min-height: 44px; padding: 10px 16px 10px 10px; }
+    .phrase { min-height: 48px; padding: 14px 16px; }
+    .mission-tab { min-height: 40px; }
+    .dialog-cta { min-height: 48px; }
+    .bottom-btn { min-height: 44px; }
+    .badge-overlay-btn { min-height: 44px; padding: 12px 28px; }
+  }
+
+  /* Reducao de motion para acessibilidade e bateria */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .ai-face-ring { animation: none; }
+    .ai-wave { animation: none; }
+    .confetti { display: none; }
+  }
+
+  /* Safe area para notch / dynamic island */
+  @supports (padding-top: env(safe-area-inset-top)) {
+    .header {
+      padding-top: calc(16px + env(safe-area-inset-top));
+    }
+    .bottom {
+      padding-bottom: calc(14px + env(safe-area-inset-bottom));
+    }
+  }
+
+  /* Dark mode (segue preferencia do sistema) */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0F0B21;
+      --paper-2: #1A1535;
+      --ink: #E8E4F0;
+      --ink-2: #C4BFD6;
+      --sky: rgba(124,58,237,.15);
+      --sky-2: rgba(124,58,237,.22);
+      --line: rgba(200,180,255,.1);
+      --line-strong: rgba(200,180,255,.2);
+      --muted: #9CA3AF;
+      --shadow-1: 0 1px 3px rgba(0,0,0,.2), 0 4px 12px rgba(0,0,0,.15);
+      --shadow-2: 0 2px 6px rgba(0,0,0,.25), 0 12px 32px rgba(0,0,0,.2);
+      --shadow-3: 0 4px 10px rgba(0,0,0,.3), 0 24px 48px rgba(0,0,0,.25);
+      --shadow-glow: 0 0 30px rgba(124,58,237,.3), 0 0 60px rgba(6,182,212,.15);
+    }
+    body { color: var(--ink); }
+    .header { background: rgba(15, 11, 33, .8); }
+    .bottom { background: rgba(15, 11, 33, .92); }
+    .ai-face-inner { background: var(--paper-2); }
+    .badge-overlay { background: rgba(0,0,0,.7); }
+    .badge-overlay-card { background: var(--paper-2); }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <span class="logo-mark">Lingua</span>
+      <span class="logo-mark" style="background: linear-gradient(135deg, var(--purple), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Rapida</span>
+      <span class="logo-dot"></span>
+    </div>
+    <div class="avatar" title="Seu perfil">VC</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero fade-in">
+    <p class="hero-greet" id="hero-greet">Bom dia, viajante</p>
+    <h1 class="hero-title">Aprenda <em>qualquer</em><br>idioma em <em>15min</em>.</h1>
+    <p class="hero-foreign" id="hero-foreign">-- "Hello, how are you?"</p>
+  </section>
+
+  <!-- AI TUTOR -->
+  <section class="ai-tutor fade-in">
+    <div class="ai-face-wrap speaking" id="ai-face-hero">
+      <div class="ai-face-ring"></div>
+      <div class="ai-face-inner">
+        <img class="ai-face-img" id="luna-img-hero" alt="Luna IA" src="data:image/jpeg;base64,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">
+      </div>
+      <div class="ai-waves">
+        <div class="ai-wave"></div>
+        <div class="ai-wave"></div>
+        <div class="ai-wave"></div>
+        <div class="ai-wave"></div>
+        <div class="ai-wave"></div>
+      </div>
+      <div class="ai-status"></div>
+    </div>
+    <div class="ai-tutor-info">
+      <div class="ai-tutor-name">Conhe&#231;a a <em>Luna</em></div>
+      <div class="ai-tutor-desc">Sua tutora pessoal de IA. Ela fala 13 idiomas e adapta cada li&#231;&#227;o ao seu ritmo.</div>
+      <div class="ai-tutor-badge">&#9889; IA Ativa</div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats stagger">
+    <div class="stat streak">
+      <div class="stat-num" id="stat-streak">7</div>
+      <div class="stat-label">Streak</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-xp">240</div>
+      <div class="stat-label">XP hoje</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num" id="stat-words">186</div>
+      <div class="stat-label">Palavras</div>
+    </div>
+  </section>
+
+  <!-- BADGES & ACHIEVEMENTS -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Conquistas</h2>
+      <span class="section-link" id="badges-count-label">0/8</span>
+    </div>
+    <div class="badges-summary">
+      <span class="badges-summary-count" id="badges-unlocked-num">0</span>
+      <span>badges desbloqueados</span>
+    </div>
+    <div class="badges-grid" id="badges-grid"></div>
+  </section>
+
+  <!-- IDIOMAS -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Escolha seu idioma</h2>
+      <a class="section-link" href="#">Ver todos</a>
+    </div>
+    <div class="langs" id="langs"></div>
+  </section>
+
+  <!-- MISSAO DO DIA -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Miss&#227;o de hoje</h2>
+      <span class="section-link" id="mission-progress-text">0/6</span>
+    </div>
+    <div class="mission-tabs" id="mission-tabs"></div>
+    <div class="mission fade-in">
+      <div class="mission-top">
+        <div class="mission-tag">Em andamento</div>
+        <div class="mission-xp">+50 XP</div>
+      </div>
+      <div class="mission-icon" id="mission-icon">&#127837;</div>
+      <h3 class="mission-title" id="mission-title">Hoje voc&#234; vai dominar <em>o Restaurante</em></h3>
+      <p class="mission-sub" id="mission-sub">Pe&#231;a, pergunte e pague como um nativo</p>
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span>Progresso</span>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIALOGO -->
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">Simulador de di&#225;logo</h2>
+    </div>
+    <div class="dialog fade-in">
+      <div class="dialog-head">
+        <div class="dialog-persona">
+          <div class="ai-face-wrap small speaking">
+            <div class="ai-face-ring"></div>
+            <div class="ai-face-inner">
+              <img class="ai-face-img" alt="Luna IA" src="data:image/jpeg;base64,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">
+            </div>
+            <div class="ai-waves">
+              <div class="ai-wave"></div>
+              <div class="ai-wave"></div>
+              <div class="ai-wave"></div>
+              <div class="ai-wave"></div>
+              <div class="ai-wave"></div>
+            </div>
+            <div class="ai-status"></div>
+          </div>
+          <div class="persona-info">
+            <span class="persona-name" id="persona-name">Luna IA</span>
+            <span class="persona-role" id="persona-role">Tutora</span>
+          </div>
+        </div>
+        <div class="dialog-counter"><strong id="dialog-revealed">0</strong>/<span id="dialog-total">6</span></div>
+      </div>
+      <div class="phrases stagger" id="phrases"></div>
+      <button class="dialog-cta" id="dialog-cta">
+        <span id="cta-text">Toque nas frases para traduzir</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </section>
+
+</div>
+
+<!-- BOTTOM -->
+<div class="bottom">
+  <div class="bottom-inner">
+    <div class="bottom-info">
+      <div class="bottom-title" id="bottom-title">Pratique mais 5 minutos</div>
+      <div class="bottom-sub" id="bottom-sub">e complete sua meta di&#225;ria</div>
+    </div>
+    <button class="bottom-btn" onclick="toast('&#128293; Continue assim!')">
+      Continuar
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- BADGE UNLOCK OVERLAY -->
+<div class="badge-overlay" id="badge-overlay">
+  <div class="badge-overlay-card">
+    <div class="badge-overlay-tag">Conquista Desbloqueada!</div>
+    <span class="badge-overlay-icon" id="badge-overlay-icon"></span>
+    <div class="badge-overlay-name" id="badge-overlay-name"></div>
+    <div class="badge-overlay-desc" id="badge-overlay-desc"></div>
+    <button class="badge-overlay-btn" onclick="closeBadgeOverlay()">Continuar</button>
+  </div>
+</div>
+
+<script>
+  // ========= DADOS =========
+  const data = {
+    en: {
+      code: 'en', name: 'Ingles', flag: '\u{1F1EC}\u{1F1E7}',
+      greeting: 'Good morning, traveler',
+      heroForeign: '-- "What\'s your favorite place?"',
+      missions: [
+        { title: 'o Restaurante', sub: 'Peca, pergunte e pague como um nativo', icon: '\u{1F35D}', persona: 'Marco', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: 'A table for two, please.', n: 'Uma mesa para dois, por favor.' },
+            { f: 'Could I see the menu?', n: 'Poderia ver o cardapio?' },
+            { f: 'What do you recommend?', n: 'O que voce recomenda?' },
+            { f: 'I\'ll have the pasta, please.', n: 'Eu quero a massa, por favor.' },
+            { f: 'Can we have the bill?', n: 'Podemos pedir a conta?' },
+            { f: 'It was delicious, thank you!', n: 'Estava delicioso, obrigado!' }
+          ]
+        }
+      ]
+    },
+    es: {
+      code: 'es', name: 'Espanhol', flag: '\u{1F1EA}\u{1F1F8}',
+      greeting: 'Buenos dias, viajero',
+      heroForeign: '-- "\u00BFCual es tu lugar favorito?"',
+      missions: [
+        { title: 'o Restaurante', sub: 'Pide, pregunta y paga como un nativo', icon: '\u{1F958}', persona: 'Carlos', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: 'Una mesa para dos, por favor.', n: 'Uma mesa para dois, por favor.' },
+            { f: '\u00BFMe trae la carta, por favor?', n: 'Poderia me trazer o cardapio?' },
+            { f: '\u00BFQue me recomienda?', n: 'O que voce me recomenda?' },
+            { f: 'Para mi, la paella.', n: 'Para mim, a paella.' },
+            { f: 'La cuenta, por favor.', n: 'A conta, por favor.' },
+            { f: '\u00A1Estaba riquisimo!', n: 'Estava uma delicia!' }
+          ]
+        }
+      ]
+    },
+    fr: {
+      code: 'fr', name: 'Frances', flag: '\u{1F1EB}\u{1F1F7}',
+      greeting: 'Bonjour, voyageur',
+      heroForeign: '-- "Quelle est votre ville preferee?"',
+      missions: [
+        { title: 'o Cafe Parisiense', sub: 'Peca um cafe como um parisiense', icon: '\u{1F950}', persona: 'Pierre', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: 'Un cafe creme, s\'il vous plait.', n: 'Um cafe com leite, por favor.' },
+            { f: 'Qu\'est-ce que vous recommandez?', n: 'O que voce recomenda?' },
+            { f: 'Un croissant, s\'il vous plait.', n: 'Um croissant, por favor.' },
+            { f: 'L\'addition, s\'il vous plait.', n: 'A conta, por favor.' },
+            { f: 'C\'etait delicieux.', n: 'Estava delicioso.' },
+            { f: 'Merci beaucoup, au revoir!', n: 'Muito obrigado, ate logo!' }
+          ]
+        }
+      ]
+    },
+    it: {
+      code: 'it', name: 'Italiano', flag: '\u{1F1EE}\u{1F1F9}',
+      greeting: 'Buongiorno, viaggiatore',
+      heroForeign: '-- "Dove ti piace andare?"',
+      missions: [
+        { title: 'la Trattoria', sub: 'Peca como se estivesse em Roma', icon: '\u{1F355}', persona: 'Gianni', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: 'Un tavolo per due, per favore.', n: 'Uma mesa para dois, por favor.' },
+            { f: 'Il menu, per favore.', n: 'O cardapio, por favor.' },
+            { f: 'Cosa mi consiglia?', n: 'O que voce me aconselha?' },
+            { f: 'Prendo la pizza margherita.', n: 'Eu quero a pizza margherita.' },
+            { f: 'Il conto, per favore.', n: 'A conta, por favor.' },
+            { f: 'Era buonissimo, grazie!', n: 'Estava delicioso, obrigado!' }
+          ]
+        }
+      ]
+    },
+    de: {
+      code: 'de', name: 'Alemao', flag: '\u{1F1E9}\u{1F1EA}',
+      greeting: 'Guten Morgen, Reisender',
+      heroForeign: '-- "Wo gehst du gerne hin?"',
+      missions: [
+        { title: 'o Biergarten', sub: 'Peca como um bavaro autentico', icon: '\u{1F37A}', persona: 'Hans', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: 'Einen Tisch fur zwei, bitte.', n: 'Uma mesa para dois, por favor.' },
+            { f: 'Die Speisekarte, bitte.', n: 'O cardapio, por favor.' },
+            { f: 'Was empfehlen Sie?', n: 'O que voce recomenda?' },
+            { f: 'Ich nehme das Schnitzel.', n: 'Eu quero o schnitzel.' },
+            { f: 'Die Rechnung, bitte.', n: 'A conta, por favor.' },
+            { f: 'Sehr lecker, danke!', n: 'Muito gostoso, obrigado!' }
+          ]
+        }
+      ]
+    },
+    ja: {
+      code: 'ja', name: 'Japones', flag: '\u{1F1EF}\u{1F1F5}',
+      greeting: '\u304A\u306F\u3088\u3046, viajante',
+      heroForeign: '-- "\u3069\u3053\u306B\u884C\u304F\u306E\u304C\u597D\u304D\u3067\u3059\u304B?"',
+      missions: [
+        { title: 'o Izakaya', sub: 'Peca como um tokyoita', icon: '\u{1F363}', persona: 'Yuki', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: '\u4E8C\u4EBA\u3067\u3059\u3001\u304A\u9858\u3044\u3057\u307E\u3059\u3002', n: 'Somos em dois, por favor.' },
+            { f: '\u30E1\u30CB\u30E5\u30FC\u3092\u304A\u9858\u3044\u3057\u307E\u3059\u3002', n: 'O cardapio, por favor.' },
+            { f: '\u304A\u3059\u3059\u3081\u306F\u4F55\u3067\u3059\u304B?', n: 'Qual e a recomendacao?' },
+            { f: '\u3053\u308C\u3092\u304F\u3060\u3055\u3044\u3002', n: 'Eu quero este, por favor.' },
+            { f: '\u304A\u4F1A\u8A08\u304A\u9858\u3044\u3057\u307E\u3059\u3002', n: 'A conta, por favor.' },
+            { f: '\u304A\u3044\u3057\u304B\u3063\u305F\u3067\u3059\u3001\u3042\u308A\u304C\u3068\u3046!', n: 'Estava delicioso, obrigado!' }
+          ]
+        }
+      ]
+    },
+    zh: {
+      code: 'zh', name: 'Mandarim', flag: '\u{1F1E8}\u{1F1F3}',
+      greeting: '\u65E9\u4E0A\u597D, viajante',
+      heroForeign: '-- "\u4F60\u559C\u6B22\u53BB\u54EA\u91CC?"',
+      missions: [
+        { title: 'o Restaurante Chines', sub: 'Peca em mandarim como um local', icon: '\u{1F961}', persona: 'Wei', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: '\u8BF7\u95EE\uFF0C\u4E24\u4F4D\uFF0C\u6709\u4F4D\u5417?', n: 'Com licenca, mesa para dois, tem lugar?' },
+            { f: '\u80FD\u770B\u4E00\u4E0B\u83DC\u5355\u5417?', n: 'Pode ver o cardapio?' },
+            { f: '\u4F60\u63A8\u8350\u4EC0\u4E48\u83DC?', n: 'O que voce recomenda?' },
+            { f: '\u6211\u8981\u5BAB\u4FDD\u9E21\u4E01\u3002', n: 'Eu quero o frango xadrez.' },
+            { f: '\u4E70\u5355\uFF0C\u8C22\u8C22\u3002', n: 'A conta, obrigado.' },
+            { f: '\u5F88\u597D\u5403\uFF0C\u8C22\u8C22!', n: 'Estava muito bom, obrigado!' }
+          ]
+        }
+      ]
+    },
+    ru: {
+      code: 'ru', name: 'Russo', flag: '\u{1F1F7}\u{1F1FA}',
+      greeting: '\u0414\u043E\u0431\u0440\u043E\u0435 \u0443\u0442\u0440\u043E, \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u0438\u043A',
+      heroForeign: '-- "\u041A\u0443\u0434\u0430 \u0432\u044B \u043B\u044E\u0431\u0438\u0442\u0435 \u0445\u043E\u0434\u0438\u0442\u044C?"',
+      missions: [
+        { title: 'o Restaurante Russo', sub: 'Peca como um moscovita', icon: '\u{1F95F}', persona: 'Dmitri', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: '\u0421\u0442\u043E\u043B\u0438\u043A \u043D\u0430 \u0434\u0432\u043E\u0438\u0445, \u043F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430.', n: 'Uma mesa para dois, por favor.' },
+            { f: '\u041C\u043E\u0436\u043D\u043E \u043C\u0435\u043D\u044E?', n: 'Pode ver o cardapio?' },
+            { f: '\u0427\u0442\u043E \u043F\u043E\u0440\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u0442\u0435?', n: 'O que voce recomenda?' },
+            { f: '\u042F \u0432\u043E\u0437\u044C\u043C\u0443 \u043F\u0435\u043B\u044C\u043C\u0435\u043D\u0438.', n: 'Eu quero os pelmeni.' },
+            { f: '\u0421\u0447\u0451\u0442, \u043F\u043E\u0436\u0430\u043B\u0443\u0439\u0441\u0442\u0430.', n: 'A conta, por favor.' },
+            { f: '\u041E\u0447\u0435\u043D\u044C \u0432\u043A\u0443\u0441\u043D\u043E, \u0441\u043F\u0430\u0441\u0438\u0431\u043E!', n: 'Muito gostoso, obrigado!' }
+          ]
+        }
+      ]
+    },
+    ko: {
+      code: 'ko', name: 'Coreano', flag: '\u{1F1F0}\u{1F1F7}',
+      greeting: '\uC548\uB155\uD558\uC138\uC694, \uC5EC\uD589\uC790',
+      heroForeign: '-- "\uC5B4\uB514\uC5D0 \uAC00\uB294 \uAC83\uC744 \uC88B\uC544\uD574\uC694?"',
+      missions: [
+        { title: 'o Restaurante Coreano', sub: 'Peca como um Seulita', icon: '\u{1F35C}', persona: 'Min-jun', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: '\uB450 \uBA85\uC785\uB2C8\uB2E4.', n: 'Somos em dois.' },
+            { f: '\uBA54\uB274\uD310 \uBCF4\uC5EC\uC8FC\uC138\uC694.', n: 'Pode ver o cardapio?' },
+            { f: '\uBB50\uAC00 \uB9DB\uC788\uC5B4\uC694?', n: 'O que e gostoso?' },
+            { f: '\uBE44\uBE54\uBC25 \uC8FC\uC138\uC694.', n: 'Eu quero o bibimbap.' },
+            { f: '\uACC4\uC0B0\uC11C \uC8FC\uC138\uC694.', n: 'A conta, por favor.' },
+            { f: '\uB108\uBB34 \uB9DB\uC788\uC5B4\uC694, \uAC10\uC0AC\uD569\uB2C8\uB2E4!', n: 'Esta muito gostoso, obrigado!' }
+          ]
+        }
+      ]
+    },
+    ar: {
+      code: 'ar', name: 'Arabe', flag: '\u{1F1F8}\u{1F1E6}',
+      greeting: '\u0635\u0628\u0627\u062D \u0627\u0644\u062E\u064A\u0631, \u0645\u0633\u0627\u0641\u0631',
+      heroForeign: '-- "\u0625\u0644\u0649 \u0623\u064A\u0646 \u062A\u062D\u0628 \u0627\u0644\u0630\u0647\u0627\u0628?"',
+      missions: [
+        { title: 'o Restaurante Arabe', sub: 'Peca como um local', icon: '\u{1F959}', persona: 'Ahmad', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: '\u0637\u0627\u0648\u0644\u0629 \u0644\u0634\u062E\u0635\u064A\u0646\u060C \u0645\u0646 \u0641\u0636\u0644\u0643.', n: 'Uma mesa para dois, por favor.' },
+            { f: '\u0623\u0639\u0637\u0646\u064A \u0627\u0644\u0642\u0627\u0626\u0645\u0629\u060C \u0645\u0646 \u0641\u0636\u0644\u0643.', n: 'Pode ver o cardapio?' },
+            { f: '\u0645\u0627\u0630\u0627 \u062A\u0646\u0635\u062D\u0646\u064A\u061F', n: 'O que voce me aconselha?' },
+            { f: '\u0623\u0631\u064A\u062F \u0634\u0627\u0648\u0631\u0645\u0627.', n: 'Eu quero shawarma.' },
+            { f: '\u0627\u0644\u062D\u0633\u0627\u0628\u060C \u0645\u0646 \u0641\u0636\u0644\u0643.', n: 'A conta, por favor.' },
+            { f: '\u0627\u0644\u0637\u0639\u0627\u0645 \u0644\u0630\u064A\u0630 \u062C\u062F\u0627\u064B\u060C \u0634\u0643\u0631\u0627\u064B!', n: 'A comida esta muito gostosa, obrigado!' }
+          ]
+        }
+      ]
+    },
+    hi: {
+      code: 'hi', name: 'Hindi', flag: '\u{1F1EE}\u{1F1F3}',
+      greeting: '\u0928\u092E\u0938\u094D\u0924\u0947, \u092F\u093E\u0924\u094D\u0930\u0940',
+      heroForeign: '-- "\u0906\u092A \u0915\u0939\u093E\u0901 \u091C\u093E\u0928\u093E \u092A\u0938\u0902\u0926 \u0915\u0930\u0924\u0947 \u0939\u0948\u0902?"',
+      missions: [
+        { title: 'o Restaurante Indiano', sub: 'Peca como em Mumbai', icon: '\u{1F35B}', persona: 'Raj', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: '\u0926\u094B \u0932\u094B\u0917\u094B\u0902 \u0915\u0947 \u0932\u093F\u090F \u091F\u0947\u092C\u0932\u0964', n: 'Uma mesa para dois.' },
+            { f: '\u092E\u0947\u0928\u094D\u092F\u0942 \u0926\u093F\u0916\u093E\u0907\u090F\u0964', n: 'Pode ver o cardapio?' },
+            { f: '\u0906\u092A \u0915\u094D\u092F\u093E \u0938\u0941\u091D\u093E\u090F\u0901\u0917\u0947?', n: 'O que voce recomenda?' },
+            { f: '\u092E\u0941\u091D\u0947 \u092C\u091F\u0930 \u091A\u093F\u0915\u0928 \u091A\u093E\u0939\u093F\u090F\u0964', n: 'Eu quero o butter chicken.' },
+            { f: '\u092C\u093F\u0932 \u0932\u093E\u0907\u090F\u0964', n: 'Traga a conta.' },
+            { f: '\u092C\u0939\u0941\u0924 \u0938\u094D\u0935\u093E\u0926\u093F\u0937\u094D\u091F \u0925\u093E, \u0927\u0928\u094D\u092F\u0935\u093E\u0926!', n: 'Estava muito gostoso, obrigado!' }
+          ]
+        }
+      ]
+    },
+    pt: {
+      code: 'pt', name: 'Portugues', flag: '\u{1F1E7}\u{1F1F7}',
+      greeting: 'Bom dia, viajante',
+      heroForeign: '-- "Para onde voce gosta de ir?"',
+      missions: [
+        { title: 'o Restaurante Brasileiro', sub: 'Peca como um brasileiro', icon: '\u{1F356}', persona: 'Joao', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: 'Mesa para dois, por favor.', n: 'Table for two, please.' },
+            { f: 'Pode me trazer o cardapio?', n: 'Could I see the menu?' },
+            { f: 'O que voce recomenda?', n: 'What do you recommend?' },
+            { f: 'Eu quero uma feijoada.', n: 'I\'d like a feijoada.' },
+            { f: 'A conta, por favor.', n: 'The bill, please.' },
+            { f: 'Estava delicioso, obrigado!', n: 'It was delicious, thank you!' }
+          ]
+        }
+      ]
+    },
+    tr: {
+      code: 'tr', name: 'Turco', flag: '\u{1F1F9}\u{1F1F7}',
+      greeting: 'Gunaydin, gezgin',
+      heroForeign: '-- "Nereye gitmeyi seversin?"',
+      missions: [
+        { title: 'o Restaurante Turco', sub: 'Peca como em Istambul', icon: '\u{1F958}', persona: 'Mehmet', role: 'Garcom', avatar: '\u{1F468}\u200D\u{1F373}',
+          phrases: [
+            { f: 'Iki kisilik masa, lutfen.', n: 'Uma mesa para dois, por favor.' },
+            { f: 'Menuyu gorebilir miyim?', n: 'Pode ver o cardapio?' },
+            { f: 'Ne tavsiye edersiniz?', n: 'O que voce recomenda?' },
+            { f: 'Kebap istiyorum.', n: 'Eu quero kebab.' },
+            { f: 'Hesap, lutfen.', n: 'A conta, por favor.' },
+            { f: 'Cok lezzetliydi, tesekkurler!', n: 'Estava muito gostoso, obrigado!' }
+          ]
+        }
+      ]
+    }
+  };
+
+  // ========= BADGES SYSTEM =========
+  const BADGES = [
+    { id: 'first_word', name: 'Primeira Palavra', desc: 'Traduziu sua primeira frase', icon: '\u{1F331}', target: 1, type: 'reveals' },
+    { id: 'curious', name: 'Curioso', desc: 'Experimentou 3 idiomas diferentes', icon: '\u{1F50D}', target: 3, type: 'langs' },
+    { id: 'mission_done', name: 'Miss\u00E3o Cumprida', desc: 'Completou uma miss\u00E3o inteira', icon: '\u2B50', target: 1, type: 'missions' },
+    { id: 'scholar', name: 'Estudioso', desc: 'Traduziu 15 frases no total', icon: '\u{1F4DA}', target: 15, type: 'reveals' },
+    { id: 'polyglot', name: 'Poliglota', desc: 'Experimentou 6 idiomas diferentes', icon: '\u{1F30D}', target: 6, type: 'langs' },
+    { id: 'xp_hunter', name: 'Ca\u00E7ador de XP', desc: 'Acumulou 500 XP no total', icon: '\u{1F48E}', target: 500, type: 'xp' },
+    { id: 'world_traveler', name: 'Viajante Mundial', desc: 'Experimentou 10 idiomas', icon: '\u2708\uFE0F', target: 10, type: 'langs' },
+    { id: 'legend', name: 'Lenda', desc: 'Desbloqueou todos os outros badges', icon: '\u{1F451}', target: 7, type: 'badges' }
+  ];
+
+  let badgeState = {
+    unlockedIds: [],
+    totalReveals: 0,
+    totalXP: 240,
+    totalMissions: 0,
+    langsUsed: new Set(['en'])
+  };
+
+  // Try to load saved state
+  try {
+    const saved = localStorage.getItem('linguaRapida_badges');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      badgeState.unlockedIds = parsed.unlockedIds || [];
+      badgeState.totalReveals = parsed.totalReveals || 0;
+      badgeState.totalXP = parsed.totalXP || 240;
+      badgeState.totalMissions = parsed.totalMissions || 0;
+      badgeState.langsUsed = new Set(parsed.langsUsed || ['en']);
+    }
+  } catch(e) {}
+
+  function saveBadgeState() {
+    try {
+      localStorage.setItem('linguaRapida_badges', JSON.stringify({
+        unlockedIds: badgeState.unlockedIds,
+        totalReveals: badgeState.totalReveals,
+        totalXP: badgeState.totalXP,
+        totalMissions: badgeState.totalMissions,
+        langsUsed: Array.from(badgeState.langsUsed)
+      }));
+    } catch(e) {}
+  }
+
+  function getBadgeProgress(badge) {
+    switch(badge.type) {
+      case 'reveals': return Math.min(badgeState.totalReveals, badge.target);
+      case 'langs': return Math.min(badgeState.langsUsed.size, badge.target);
+      case 'missions': return Math.min(badgeState.totalMissions, badge.target);
+      case 'xp': return Math.min(badgeState.totalXP, badge.target);
+      case 'badges': return Math.min(badgeState.unlockedIds.filter(id => id !== 'legend').length, badge.target);
+      default: return 0;
+    }
+  }
+
+  function checkBadges() {
+    let newBadges = [];
+    BADGES.forEach(badge => {
+      if (badgeState.unlockedIds.includes(badge.id)) return;
+      const progress = getBadgeProgress(badge);
+      if (progress >= badge.target) {
+        badgeState.unlockedIds.push(badge.id);
+        newBadges.push(badge);
+      }
+    });
+    if (newBadges.length > 0) {
+      saveBadgeState();
+      renderBadges();
+      // Show overlay for first new badge (queue others)
+      showBadgeUnlockQueue(newBadges);
+    }
+  }
+
+  let badgeQueue = [];
+  function showBadgeUnlockQueue(badges) {
+    badgeQueue = badgeQueue.concat(badges);
+    if (badgeQueue.length === badges.length) {
+      showNextBadge();
+    }
+  }
+
+  function showNextBadge() {
+    if (badgeQueue.length === 0) return;
+    const badge = badgeQueue.shift();
+    showBadgeOverlay(badge);
+  }
+
+  // ========= SOUND EFFECTS (Web Audio API) =========
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  let audioCtx = null;
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    return audioCtx;
+  }
+
+  function playBadgeSound() {
+    try {
+      const ctx = getAudioCtx();
+      const now = ctx.currentTime;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.25, now);
+      master.connect(ctx.destination);
+
+      // Sparkle arpeggio: C5 E5 G5 C6
+      const notes = [523.25, 659.25, 783.99, 1046.5];
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        gain.gain.setValueAtTime(0, now + i * 0.1);
+        gain.gain.linearRampToValueAtTime(0.4, now + i * 0.1 + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.5);
+        osc.connect(gain);
+        gain.connect(master);
+        osc.start(now + i * 0.1);
+        osc.stop(now + i * 0.1 + 0.5);
+      });
+
+      // Shimmer high tone
+      const shimmer = ctx.createOscillator();
+      const sGain = ctx.createGain();
+      shimmer.type = 'triangle';
+      shimmer.frequency.setValueAtTime(1568, now + 0.35);
+      shimmer.frequency.exponentialRampToValueAtTime(2093, now + 0.65);
+      sGain.gain.setValueAtTime(0, now + 0.35);
+      sGain.gain.linearRampToValueAtTime(0.15, now + 0.42);
+      sGain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+      shimmer.connect(sGain);
+      sGain.connect(master);
+      shimmer.start(now + 0.35);
+      shimmer.stop(now + 0.8);
+    } catch(e) {}
+  }
+
+  function playRevealSound() {
+    try {
+      const ctx = getAudioCtx();
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);
+      osc.frequency.exponentialRampToValueAtTime(1320, now + 0.08);
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.15);
+    } catch(e) {}
+  }
+
+  function playMissionCompleteSound() {
+    try {
+      const ctx = getAudioCtx();
+      const now = ctx.currentTime;
+      const master = ctx.createGain();
+      master.gain.setValueAtTime(0.2, now);
+      master.connect(ctx.destination);
+
+      // Fanfare: G4 C5 E5 G5 â€” C6
+      const notes = [392, 523.25, 659.25, 783.99, 1046.5];
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = i < 4 ? 'triangle' : 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        const t = i * 0.12;
+        gain.gain.setValueAtTime(0, now + t);
+        gain.gain.linearRampToValueAtTime(0.5, now + t + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + t + (i === 4 ? 0.9 : 0.45));
+        osc.connect(gain);
+        gain.connect(master);
+        osc.start(now + t);
+        osc.stop(now + t + (i === 4 ? 0.9 : 0.45));
+      });
+    } catch(e) {}
+  }
+
+  function showBadgeOverlay(badge) {
+    document.getElementById('badge-overlay-icon').textContent = badge.icon;
+    document.getElementById('badge-overlay-name').textContent = badge.name;
+    document.getElementById('badge-overlay-desc').textContent = badge.desc;
+    const overlay = document.getElementById('badge-overlay');
+    overlay.classList.add('show');
+    playBadgeSound();
+    spawnConfetti();
+    // Highlight the badge card
+    const card = document.querySelector('[data-badge-id="' + badge.id + '"]');
+    if (card) {
+      card.classList.remove('locked');
+      card.classList.add('unlocked', 'just-earned');
+      setTimeout(() => card.classList.remove('just-earned'), 2000);
+    }
+  }
+
+  function closeBadgeOverlay() {
+    document.getElementById('badge-overlay').classList.remove('show');
+    // Show next badge if queued
+    setTimeout(showNextBadge, 300);
+  }
+
+  function spawnConfetti() {
+    const colors = ['#7C3AED', '#06B6D4', '#F43F5E', '#F59E0B', '#10B981', '#EC4899'];
+    for (let i = 0; i < 30; i++) {
+      const el = document.createElement('div');
+      el.className = 'confetti';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.background = colors[Math.floor(Math.random() * colors.length)];
+      el.style.width = (6 + Math.random() * 8) + 'px';
+      el.style.height = (6 + Math.random() * 8) + 'px';
+      el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      el.style.animationDuration = (2 + Math.random() * 2) + 's';
+      el.style.animationDelay = (Math.random() * 0.8) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 4000);
+    }
+  }
+
+  function renderBadges() {
+    const grid = document.getElementById('badges-grid');
+    grid.innerHTML = '';
+    BADGES.forEach(badge => {
+      const unlocked = badgeState.unlockedIds.includes(badge.id);
+      const progress = getBadgeProgress(badge);
+      const percent = Math.min(100, Math.round((progress / badge.target) * 100));
+      const card = document.createElement('div');
+      card.className = 'badge-card ' + (unlocked ? 'unlocked' : 'locked');
+      card.dataset.badgeId = badge.id;
+      card.innerHTML =
+        '<span class="badge-lock-icon">\u{1F512}</span>' +
+        '<span class="badge-check-icon">\u2713</span>' +
+        '<span class="badge-icon">' + badge.icon + '</span>' +
+        '<div class="badge-name">' + badge.name + '</div>' +
+        '<div class="badge-desc">' + badge.desc + '</div>' +
+        '<div class="badge-progress-bar"><div class="badge-progress-fill" style="width:' + percent + '%"></div></div>';
+      grid.appendChild(card);
+    });
+    // Update summary
+    const count = badgeState.unlockedIds.length;
+    document.getElementById('badges-unlocked-num').textContent = count;
+    document.getElementById('badges-count-label').textContent = count + '/' + BADGES.length;
+  }
+
+  // ========= ESTADO =========
+  let currentLang = 'en';
+  let revealedCount = 0;
+
+  // ========= INIT =========
+  function init() {
+    renderBadges();
+    renderLangs();
+    selectLang('en');
+    updateGreeting();
+    // Toggle speaking animation periodically
+    setInterval(() => {
+      const faces = document.querySelectorAll('.ai-face-wrap');
+      faces.forEach(f => {
+        f.classList.toggle('speaking');
+        setTimeout(() => f.classList.toggle('speaking'), 2000 + Math.random() * 2000);
+      });
+    }, 5000);
+  }
+
+  function updateGreeting() {
+    const hour = new Date().getHours();
+    let greet = 'Bom dia';
+    if (hour >= 12 && hour < 18) greet = 'Boa tarde';
+    else if (hour >= 18 || hour < 5) greet = 'Boa noite';
+    document.getElementById('hero-greet').textContent = greet + ', viajante';
+  }
+
+  function renderLangs() {
+    const container = document.getElementById('langs');
+    container.innerHTML = '';
+    Object.values(data).forEach(lang => {
+      const btn = document.createElement('button');
+      btn.className = 'lang' + (lang.code === currentLang ? ' active' : '');
+      btn.dataset.code = lang.code;
+      btn.innerHTML = '<span class="flag">' + lang.flag + '</span><span>' + lang.name + '</span>';
+      btn.onclick = () => selectLang(lang.code);
+      container.appendChild(btn);
+    });
+  }
+
+  function selectLang(code) {
+    currentLang = code;
+    revealedCount = 0;
+    // Track language for badges
+    badgeState.langsUsed.add(code);
+    saveBadgeState();
+    checkBadges();
+    renderBadges();
+    document.querySelectorAll('.lang').forEach(el => {
+      el.classList.toggle('active', el.dataset.code === code);
+    });
+    const lang = data[code];
+    document.getElementById('hero-foreign').textContent = lang.heroForeign;
+    const mission = lang.missions[0];
+    document.getElementById('mission-icon').textContent = mission.icon;
+    document.getElementById('mission-title').innerHTML = 'Hoje voce vai dominar <em>' + mission.title + '</em>';
+    document.getElementById('mission-sub').textContent = mission.sub;
+    document.getElementById('dialog-total').textContent = mission.phrases.length;
+    document.getElementById('dialog-revealed').textContent = '0';
+    document.getElementById('mission-progress-text').textContent = '0/' + mission.phrases.length;
+    updateProgress(0, mission.phrases.length);
+    renderPhrases(mission.phrases);
+    const cta = document.getElementById('dialog-cta');
+    cta.classList.remove('done');
+    document.getElementById('cta-text').textContent = 'Toque nas frases para traduzir';
+  }
+
+  function renderPhrases(phrases) {
+    const container = document.getElementById('phrases');
+    container.innerHTML = '';
+    phrases.forEach((phrase, idx) => {
+      const div = document.createElement('div');
+      div.className = 'phrase';
+      div.innerHTML = '<div class="phrase-hint">toque</div><div class="phrase-check">\u2713</div><div class="phrase-foreign">' + phrase.f + '</div><div class="phrase-native">' + phrase.n + '</div>';
+      div.onclick = () => revealPhrase(div);
+      container.appendChild(div);
+    });
+  }
+
+  function revealPhrase(el) {
+    if (el.classList.contains('revealed')) return;
+    el.classList.add('revealed');
+    revealedCount++;
+    playRevealSound();
+    // Track for badges
+    badgeState.totalReveals++;
+    badgeState.totalXP += 10;
+    saveBadgeState();
+    checkBadges();
+    renderBadges();
+    const lang = data[currentLang];
+    const total = lang.missions[0].phrases.length;
+    document.getElementById('dialog-revealed').textContent = revealedCount;
+    document.getElementById('mission-progress-text').textContent = revealedCount + '/' + total;
+    updateProgress(revealedCount, total);
+    updateXP(+10);
+    // Make AI face speak when phrase is revealed
+    document.querySelectorAll('.ai-face-wrap').forEach(f => {
+      f.classList.add('speaking');
+      setTimeout(() => f.classList.remove('speaking'), 1500);
+    });
+    if (revealedCount === total) completeMission();
+  }
+
+  function updateProgress(current, total) {
+    const percent = Math.round((current / total) * 100);
+    document.getElementById('progress-fill').style.width = percent + '%';
+    document.getElementById('progress-percent').textContent = percent + '%';
+  }
+
+  function updateXP(amount) {
+    const el = document.getElementById('stat-xp');
+    const current = parseInt(el.textContent);
+    el.textContent = current + amount;
+    el.animate(
+      [{ transform: 'scale(1)' }, { transform: 'scale(1.15)', color: '#10B981' }, { transform: 'scale(1)' }],
+      { duration: 500, easing: 'cubic-bezier(.34,1.56,.64,1)' }
+    );
+  }
+
+  function completeMission() {
+    // Track for badges
+    badgeState.totalMissions++;
+    badgeState.totalXP += 50;
+    saveBadgeState();
+    playMissionCompleteSound();
+    checkBadges();
+    renderBadges();
+    const cta = document.getElementById('dialog-cta');
+    cta.classList.add('done');
+    document.getElementById('cta-text').textContent = 'Missao completa! +50 XP';
+    toast('\u{1F389} Missao completa! Voce arrasou');
+    const streak = document.getElementById('stat-streak');
+    streak.animate(
+      [{ transform: 'scale(1)' }, { transform: 'scale(1.3)', color: '#F59E0B' }, { transform: 'scale(1)' }],
+      { duration: 600, easing: 'cubic-bezier(.34,1.56,.64,1)' }
+    );
+  }
+
+  function toast(message) {
+    const t = document.getElementById('toast');
+    t.textContent = message;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  document.getElementById('dialog-cta').onclick = () => {
+    if (revealedCount === 0) {
+      const first = document.querySelector('.phrase:not(.revealed)');
+      if (first) revealPhrase(first);
+    } else if (revealedCount < data[currentLang].missions[0].phrases.length) {
+      const next = document.querySelector('.phrase:not(.revealed)');
+      if (next) revealPhrase(next);
+    } else {
+      toast('\u2728 Volte amanha para nova missao!');
+    }
+  };
+
+  init();
+</script>
+
+<!-- ========= PROTECAO ANTI-COPIA & ANTI-TAMPERING ========= -->
+<style>
+  /* Bloqueia selecao de texto */
+  body, * {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+  }
+  /* Permite selecao apenas em inputs */
+  input, textarea, [contenteditable="true"] {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+  }
+  /* Bloqueia arrastar imagens e elementos */
+  img, a, * { -webkit-user-drag: none !important; user-drag: none !important; }
+  /* Marca d'agua invisivel */
+  body::after {
+    content: 'Lingua Rapida \00A9 2026 - Protegido';
+    position: fixed; bottom: -100px; right: -100px;
+    font-size: 8px; opacity: 0; pointer-events: none; z-index: -1;
+  }
+</style>
+<script>
+(function(){
+  'use strict';
+  // === ANTI-IFRAME: impede embutir em sites de terceiros ===
+  try {
+    if (window.top !== window.self && window.top.location.hostname !== window.self.location.hostname) {
+      window.top.location = window.self.location;
+    }
+  } catch(e) { /* cross-origin iframe - bloqueia silenciosamente */ }
+
+  // === BLOQUEIO DE CLIQUE DIREITO ===
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }, true);
+
+  // === BLOQUEIO DE TECLAS PERIGOSAS ===
+  document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); return false; }
+    // Ctrl+Shift+I (DevTools)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); return false; }
+    // Ctrl+Shift+J (Console)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); return false; }
+    // Ctrl+Shift+C (Inspect)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); return false; }
+    // Ctrl+U (View Source)
+    if (e.ctrlKey && (e.key === 'u' || e.key === 'U')) { e.preventDefault(); return false; }
+    // Ctrl+S (Save)
+    if (e.ctrlKey && (e.key === 's' || e.key === 'S')) { e.preventDefault(); return false; }
+    // Ctrl+A (Select All)
+    if (e.ctrlKey && (e.key === 'a' || e.key === 'A')) { e.preventDefault(); return false; }
+    // Ctrl+C (Copy)
+    if (e.ctrlKey && (e.key === 'c' || e.key === 'C') && !e.shiftKey) { e.preventDefault(); return false; }
+    // Ctrl+P (Print - protege contra impressao nao autorizada)
+    if (e.ctrlKey && (e.key === 'p' || e.key === 'P')) { e.preventDefault(); return false; }
+    // Ctrl+Shift+U (View Source alternativo)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); return false; }
+  }, true);
+
+  // === BLOQUEIO DE SELECAO ===
+  document.addEventListener('selectstart', function(e) {
+    if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      return false;
+    }
+  }, true);
+
+  // === BLOQUEIO DE COPIAR ===
+  document.addEventListener('copy', function(e) {
+    e.preventDefault();
+    e.clipboardData && e.clipboardData.setData('text/plain', 'Conteudo protegido - Lingua Rapida');
+    return false;
+  }, true);
+
+  // === BLOQUEIO DE CORTAR ===
+  document.addEventListener('cut', function(e) {
+    e.preventDefault();
+    return false;
+  }, true);
+
+  // === BLOQUEIO DE ARRASTAR ===
+  document.addEventListener('dragstart', function(e) {
+    e.preventDefault();
+    return false;
+  }, true);
+
+  document.addEventListener('drop', function(e) {
+    e.preventDefault();
+    return false;
+  }, true);
+
+  // === DETECCAO DE DEVTOOLS (alerta sem destruir) ===
+  var _dt = { open: false, warned: false };
+  var _dtCheck = function() {
+    var w = 200;
+    var h = window.outerHeight - window.innerHeight > w;
+    var v = window.outerWidth - window.innerWidth > w;
+    if ((h || v) && !_dt.warned) {
+      _dt.warned = true;
+      console.warn('[PROTECAO] Ferramentas de desenvolvedor detectadas.');
+    }
+  };
+  setInterval(_dtCheck, 2000);
+
+  // === ANTI-DEBUG: debugger trap (leve) ===
+  var _adCount = 0;
+  (function _ad() {
+    if (_adCount < 3) {
+      try { (function(){}).constructor('debugger')(); } catch(e) {}
+      _adCount++;
+    }
+    setTimeout(_ad, 5000);
+  })();
+
+  // === CONSOLE WARNING ===
+  if (typeof console !== 'undefined') {
+    console.log('%c PARE!', 'color:red;font-size:60px;font-weight:bold;');
+    console.log('%c Este aplicativo e protegido. Qualquer tentativa de copiar, modificar ou fazer engenharia reversa e proibida e pode resultar em acoes legais.', 'color:#333;font-size:16px;');
+    console.log('%c Lingua Rapida - Todos os direitos reservados 2026', 'color:#7C3AED;font-size:12px;');
+  }
+
+  // === INTEGRIDADE: verifica se elementos essenciais existem ===
+  setInterval(function() {
+    var critical = ['dialog-cta','hero-greet','badges-grid','toast'];
+    for (var i = 0; i < critical.length; i++) {
+      if (!document.getElementById(critical[i])) {
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;background:#1E1B4B;color:white;text-align:center;padding:20px;"><div><h1 style="font-size:48px;margin-bottom:16px;">&#9888;</h1><h2>Arquivo Corrompido</h2><p style="opacity:.7;margin-top:8px;">Este aplicativo foi alterado indevidamente.<br>Use a versao original.</p></div></div>';
+        break;
+      }
+    }
+  }, 5000);
+
+  // === BLOQUEIO DE PRINT SCREEN (parcial) ===
+  document.addEventListener('keyup', function(e) {
+    if (e.key === 'PrintScreen') {
+      navigator.clipboard && navigator.clipboard.writeText('');
+    }
+  });
+
+  // === WATERMARK META ===
+  var m = document.createElement('meta');
+  m.name = 'copyright';
+  m.content = 'Lingua Rapida - Software protegido contra copia - 2026';
+  document.head.appendChild(m);
+  var m2 = document.createElement('meta');
+  m2.name = 'author';
+  m2.content = 'Gerson Fernandes';
+  document.head.appendChild(m2);
+  var m3 = document.createElement('meta');
+  m3.httpEquiv = 'X-Frame-Options';
+  m3.content = 'DENY';
+  document.head.appendChild(m3);
+})();
+</script>
+
+</body>
+</html>
