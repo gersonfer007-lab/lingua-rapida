@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Instrucoes — Lingua Rapida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1E1B4B;
+    --purple: #7C3AED;
+    --purple-2: #6D28D9;
+    --cyan: #06B6D4;
+    --rose: #F43F5E;
+    --sky: #EDE9FE;
+    --paper: #FAF5FF;
+    --muted: #6B7280;
+    --success: #10B981;
+    --warning: #F59E0B;
+  }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    .manual { max-width: 100%; box-shadow: none; }
+  }
+
+  .manual {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* Cover */
+  .cover {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, var(--ink) 0%, #5B21B6 50%, #312E81 100%);
+    border-radius: 24px;
+    color: white;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -40%; right: -20%;
+    width: 80%; height: 200%;
+    background: radial-gradient(circle, rgba(6,182,212,.25) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cover-logo {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 42px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .cover-logo span {
+    background: linear-gradient(135deg, #fff, var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .cover-subtitle {
+    font-size: 14px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .cover-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .cover-version {
+    font-size: 13px;
+    color: rgba(255,255,255,.5);
+    position: relative;
+  }
+
+  /* TOC */
+  .toc {
+    background: white;
+    border: 1px solid rgba(124,58,237,.1);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .toc-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sky);
+  }
+  .toc-list {
+    list-style: none;
+    counter-reset: toc;
+  }
+  .toc-list li {
+    counter-increment: toc;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(124,58,237,.05);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .toc-list li:last-child { border-bottom: none; }
+  .toc-list li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    color: var(--purple);
+    min-width: 28px;
+  }
+  .toc-list a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color .2s;
+  }
+  .toc-list a:hover { color: var(--purple); }
+
+  /* Sections */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-num {
+    font-family: 'Instrument Serif', serif;
+    font-size: 14px;
+    color: var(--purple);
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+  }
+  .section h2 {
+    font-family: 'Instrument Serif', serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--ink);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--sky);
+  }
+  .section h3 {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 24px 0 12px;
+  }
+  .section p {
+    font-size: 15px;
+    color: #374151;
+    margin-bottom: 12px;
+    line-height: 1.7;
+  }
+  .section ul, .section ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+  .section li {
+    font-size: 15px;
+    color: #374151;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  /* Info boxes */
+  .info-box {
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .info-box .icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .info-box.tip {
+    background: rgba(16,185,129,.08);
+    border-left: 3px solid var(--success);
+    color: #065F46;
+  }
+  .info-box.warning {
+    background: rgba(245,158,11,.08);
+    border-left: 3px solid var(--warning);
+    color: #92400E;
+  }
+  .info-box.info {
+    background: rgba(124,58,237,.06);
+    border-left: 3px solid var(--purple);
+    color: #3B0764;
+  }
+
+  /* Feature cards */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .feature {
+    background: white;
+    border: 1px solid rgba(124,58,237,.1);
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .feature-icon { font-size: 32px; margin-bottom: 8px; }
+  .feature-name {
+    font-family: 'Instrument Serif', serif;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .feature-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* Badge table */
+  .badge-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .badge-table th {
+    background: var(--ink);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .badge-table th:first-child { border-radius: 10px 0 0 0; }
+  .badge-table th:last-child { border-radius: 0 10px 0 0; }
+  .badge-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--sky);
+    color: #374151;
+  }
+  .badge-table tr:last-child td { border-bottom: none; }
+  .badge-table tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+  .badge-table tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+  .badge-table tbody tr {
+    background: white;
+    transition: background .2s;
+  }
+  .badge-table tbody tr:hover { background: var(--sky); }
+
+  /* Steps */
+  .steps {
+    counter-reset: step;
+    margin: 16px 0;
+  }
+  .step {
+    counter-increment: step;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .step-num::before { content: counter(step); }
+  .step-content {
+    flex: 1;
+    padding-top: 6px;
+  }
+  .step-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .step-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Keyboard */
+  kbd {
+    display: inline-block;
+    padding: 2px 8px;
+    background: var(--sky);
+    border: 1px solid rgba(124,58,237,.15);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--purple);
+  }
+
+  /* Footer */
+  .manual-footer {
+    text-align: center;
+    padding: 32px 0;
+    border-top: 2px solid var(--sky);
+    margin-top: 48px;
+  }
+  .manual-footer p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .manual-footer .brand {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--purple);
+  }
+
+  /* Print button */
+  .print-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    color: white;
+    border: none;
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(124,58,237,.3);
+    transition: all .2s;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(124,58,237,.4);
+  }
+
+  @media (max-width: 500px) {
+    .manual { padding: 20px 16px 180px; }
+    .cover { padding: 40px 16px; border-radius: 16px; }
+    .cover-logo { font-size: 32px; }
+    .cover-title { font-size: 24px; }
+    .features { grid-template-columns: 1fr; }
+    .badge-table { font-size: 12px; }
+    .badge-table th, .badge-table td { padding: 8px 10px; }
+    .toc { padding: 20px; }
+  }
+
+  /* ========= LUNA VOICE PLAYER ========= */
+  .luna-player {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 60;
+    background: linear-gradient(135deg, #1E1B4B, #312E81);
+    border-top: 2px solid rgba(124,58,237,.4);
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 24px rgba(30,27,75,.4);
+    transition: transform .3s ease;
+  }
+  .luna-player.hidden { transform: translateY(100%); }
+  .luna-player-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .luna-player-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .luna-player-face {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 2px solid rgba(124,58,237,.6);
+    position: relative;
+  }
+  .luna-player-face.speaking {
+    border-color: var(--cyan);
+    box-shadow: 0 0 12px rgba(6,182,212,.4);
+  }
+  .luna-player-face img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .luna-player-face .speak-ring {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--cyan);
+    animation: none;
+  }
+  .luna-player-face.speaking .speak-ring {
+    animation: spinRing 1s linear infinite;
+  }
+  @keyframes spinRing {
+    to { transform: rotate(360deg); }
+  }
+  .luna-player-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .luna-player-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .luna-player-section {
+    font-size: 11px;
+    color: rgba(255,255,255,.5);
+  }
+  .luna-player-close {
+    color: rgba(255,255,255,.4);
+    font-size: 18px;
+    padding: 4px;
+    cursor: pointer;
+    transition: color .2s;
+  }
+  .luna-player-close:hover { color: white; }
+  .luna-player-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .luna-lang-select {
+    flex: 1;
+    padding: 8px 10px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 10px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 28px;
+  }
+  .luna-lang-select option { background: #1E1B4B; color: white; }
+  .luna-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all .2s;
+    border: none;
+    color: white;
+    background: rgba(255,255,255,.1);
+    flex-shrink: 0;
+  }
+  .luna-btn:hover { background: rgba(255,255,255,.2); }
+  .luna-btn.play-btn {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    font-size: 18px;
+    box-shadow: 0 4px 16px rgba(124,58,237,.3);
+  }
+  .luna-btn.play-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(124,58,237,.4);
+  }
+  .luna-progress {
+    margin-top: 8px;
+    height: 3px;
+    background: rgba(255,255,255,.1);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .luna-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    border-radius: 999px;
+    width: 0%;
+    transition: width .4s ease;
+  }
+
+  /* Toggle button to open player */
+  .luna-toggle {
+    position: fixed;
+    bottom: 80px;
+    right: 24px;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--cyan));
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(124,58,237,.4);
+    z-index: 55;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+  }
+  .luna-toggle:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(124,58,237,.5);
+  }
+  .luna-toggle.active { display: none; }
+
+  @media print {
+    .luna-player, .luna-toggle { display: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="manual">
+
+  <!-- CAPA -->
+  <div class="cover">
+    <div class="cover-logo">Lingua <span>Rapida</span></div>
+    <div class="cover-subtitle">Aplicativo de idiomas</div>
+    <h1 class="cover-title">Manual de Instrucoes</h1>
+    <div class="cover-version">Versao 1.0 — Julho 2026</div>
+  </div>
+
+  <!-- SUMARIO -->
+  <nav class="toc">
+    <div class="toc-title">Sumario</div>
+    <ol class="toc-list">
+      <li><a href="#intro">O que e o Lingua Rapida?</a></li>
+      <li><a href="#inicio">Como Comecar</a></li>
+      <li><a href="#luna">Conheca a Luna (Tutora IA)</a></li>
+      <li><a href="#idiomas">Escolhendo seu Idioma</a></li>
+      <li><a href="#missao">Missao do Dia</a></li>
+      <li><a href="#dialogo">Simulador de Dialogo</a></li>
+      <li><a href="#badges">Conquistas e Badges</a></li>
+      <li><a href="#stats">Estatisticas e Progresso</a></li>
+      <li><a href="#sons">Efeitos Sonoros</a></li>
+      <li><a href="#dark">Modo Escuro e Acessibilidade</a></li>
+      <li><a href="#dicas">Dicas para Aprender Mais Rapido</a></li>
+      <li><a href="#faq">Perguntas Frequentes</a></li>
+    </ol>
+  </nav>
+
+  <!-- 01 - INTRO -->
+  <div class="section" id="intro">
+    <div class="section-num">01</div>
+    <h2>O que e o Lingua Rapida?</h2>
+    <p>O <strong>Lingua Rapida</strong> e um aplicativo de aprendizado de idiomas baseado no <strong>metodo 80/20</strong>: voce aprende as 500 palavras e frases mais usadas em cada idioma, que cobrem aproximadamente 80% das conversacoes do dia a dia.</p>
+    <p>O app utiliza uma tutora de Inteligencia Artificial chamada <strong>Luna</strong>, que adapta as licoes ao seu ritmo e cria situacoes reais de conversa para voce praticar.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">&#127757;</div>
+        <div class="feature-name">13 Idiomas</div>
+        <div class="feature-desc">Ingles, espanhol, frances, italiano, alemao e mais</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#129302;</div>
+        <div class="feature-name">Tutora IA</div>
+        <div class="feature-desc">Luna se adapta ao seu nivel e ritmo</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#127942;</div>
+        <div class="feature-name">Gamificacao</div>
+        <div class="feature-desc">Badges, XP, streak e conquistas</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">&#9201;</div>
+        <div class="feature-name">15 Minutos</div>
+        <div class="feature-desc">Licoes curtas que cabem na sua rotina</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 - COMO COMECAR -->
+  <div class="section" id="inicio">
+    <div class="section-num">02</div>
+    <h2>Como Comecar</h2>
+    <p>Abrir o Lingua Rapida e simples. Basta abrir o arquivo <kbd>lingua-rapida.html</kbd> no navegador do seu celular ou computador.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Abra o aplicativo</div>
+          <div class="step-desc">Clique duas vezes no arquivo <kbd>lingua-rapida.html</kbd> ou abra pelo navegador (Chrome, Safari, Firefox ou Edge).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Escolha um idioma</div>
+          <div class="step-desc">Role ate a secao "Escolha seu idioma" e toque na bandeira do idioma que quer aprender.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Comece a missao</div>
+          <div class="step-desc">A missao do dia sera carregada automaticamente com frases reais usadas no dia a dia.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Toque nas frases</div>
+          <div class="step-desc">Toque em cada frase para revelar a traducao em portugues. A Luna vai "falar" a cada frase revelada.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Complete a missao</div>
+          <div class="step-desc">Quando todas as frases forem reveladas, voce completa a missao e ganha XP e badges!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-box tip">
+      <span class="icon">&#128161;</span>
+      <div>O app funciona 100% offline! Nao precisa de internet apos abrir pela primeira vez.</div>
+    </div>
+  </div>
+
+  <!-- 03 - LUNA -->
+  <div class="section" id="luna">
+    <div class="section-num">03</div>
+    <h2>Conheca a Luna (Tutora IA)</h2>
+    <p>A <strong>Luna</strong> e sua tutora pessoal de Inteligencia Artificial. Ela aparece em dois lugares do app:</p>
+    <ul>
+      <li><strong>Secao "Conheca a Luna"</strong> — Logo abaixo do titulo, com seu rosto, nome e o badge "IA Ativa".</li>
+      <li><strong>Simulador de Dialogo</strong> — Um avatar menor aparece ao lado do nome "Luna IA" como persona do dialogo.</li>
+    </ul>
+
+    <h3>Indicadores visuais da Luna</h3>
+    <ul>
+      <li><strong>Anel colorido girando</strong> — O anel roxo/cyan/rosa ao redor do rosto indica que a IA esta ativa e processando.</li>
+      <li><strong>Ondas sonoras</strong> — Barrinhas animadas aparecem abaixo do rosto quando a Luna esta "falando".</li>
+      <li><strong>Bolinha verde</strong> — O ponto verde no canto inferior direito indica que a Luna esta online e pronta.</li>
+    </ul>
+
+    <div class="info-box info">
+      <span class="icon">&#128172;</span>
+      <div>Quando voce toca em uma frase para traduzir, a Luna "fala" — as ondas sonoras se ativam e um efeito sonoro toca.</div>
+    </div>
+  </div>
+
+  <!-- 04 - IDIOMAS -->
+  <div class="section" id="idiomas">
+    <div class="section-num">04</div>
+    <h2>Escolhendo seu Idioma</h2>
+    <p>O Lingua Rapida oferece <strong>13 idiomas</strong> para voce aprender. Role horizontalmente na lista de bandeiras para ver todos:</p>
+
+    <table class="badge-table">
+      <thead>
+        <tr><th>Bandeira</th><th>Idioma</th><th>Tema da Missao</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>&#127468;&#127463;</td><td>Ingles</td><td>Restaurante</td></tr>
+        <tr><td>&#127466;&#127480;</td><td>Espanhol</td><td>Restaurante</td></tr>
+        <tr><td>&#127467;&#127479;</td><td>Frances</td><td>Cafe Parisiense</td></tr>
+        <tr><td>&#127470;&#127481;</td><td>Italiano</td><td>Trattoria</td></tr>
+        <tr><td>&#127465;&#127466;</td><td>Alemao</td><td>Biergarten</td></tr>
+        <tr><td>&#127471;&#127477;</td><td>Japones</td><td>Izakaya</td></tr>
+        <tr><td>&#127464;&#127475;</td><td>Mandarim</td><td>Restaurante Chines</td></tr>
+        <tr><td>&#127479;&#127482;</td><td>Russo</td><td>Restaurante Russo</td></tr>
+        <tr><td>&#127472;&#127479;</td><td>Coreano</td><td>Restaurante Coreano</td></tr>
+        <tr><td>&#127480;&#127462;</td><td>Arabe</td><td>Restaurante Arabe</td></tr>
+        <tr><td>&#127470;&#127475;</td><td>Hindi</td><td>Restaurante Indiano</td></tr>
+        <tr><td>&#127463;&#127479;</td><td>Portugues</td><td>Restaurante Brasileiro</td></tr>
+        <tr><td>&#127481;&#127479;</td><td>Turco</td><td>Restaurante Turco</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box tip">
+      <span class="icon">&#127919;</span>
+      <div>Experimente varios idiomas! Cada novo idioma que voce testar conta para os badges "Curioso", "Poliglota" e "Viajante Mundial".</div>
+    </div>
+  </div>
+
+  <!-- 05 - MISSAO -->
+  <div class="section" id="missao">
+    <div class="section-num">05</div>
+    <h2>Missao do Dia</h2>
+    <p>Cada idioma tem uma <strong>missao tematica</strong> com 6 frases essenciais que voce usaria em situacoes reais (restaurante, cafe, etc.).</p>
+
+    <h3>Elementos da missao</h3>
+    <ul>
+      <li><strong>Titulo</strong> — Mostra o tema (ex: "Hoje voce vai dominar o Restaurante").</li>
+      <li><strong>Subtitulo</strong> — Descreve o objetivo (ex: "Peca, pergunte e pague como um nativo").</li>
+      <li><strong>Barra de progresso</strong> — Mostra o percentual de frases traduzidas com efeito brilhante.</li>
+      <li><strong>Indicador "Em Andamento"</strong> — Ponto cyan pulsando mostra que a missao esta ativa.</li>
+      <li><strong>Recompensa</strong> — Cada missao completa da <strong>+50 XP</strong>.</li>
+    </ul>
+
+    <div class="info-box warning">
+      <span class="icon">&#9888;&#65039;</span>
+      <div>Ao trocar de idioma, o progresso da missao atual e reiniciado. Complete todas as 6 frases antes de trocar!</div>
+    </div>
+  </div>
+
+  <!-- 06 - DIALOGO -->
+  <div class="section" id="dialogo">
+    <div class="section-num">06</div>
+    <h2>Simulador de Dialogo</h2>
+    <p>O simulador apresenta frases do idioma escolhido em um formato de dialogo. E a parte principal do aprendizado.</p>
+
+    <h3>Como usar</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Leia a frase estrangeira</div>
+          <div class="step-desc">Cada cartao mostra uma frase no idioma que voce esta aprendendo. Tente adivinhar o significado.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Toque para traduzir</div>
+          <div class="step-desc">Toque no cartao (onde diz "TOQUE") para revelar a traducao em portugues. Um som de "ping" tocara.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Confira a traducao</div>
+          <div class="step-desc">A traducao aparece em roxo abaixo da frase original. Um check verde confirma que voce viu.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Use o botao CTA</div>
+          <div class="step-desc">O botao "Toque nas frases para traduzir" tambem revela frases uma a uma se preferir.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Indicadores do dialogo</h3>
+    <ul>
+      <li><strong>Contador</strong> — No canto superior direito, mostra quantas frases voce ja revelou (ex: 3/6).</li>
+      <li><strong>Avatar da Luna</strong> — Mostra o rosto da tutora com indicador de status.</li>
+      <li><strong>Barra gradiente</strong> — Uma barra colorida (roxo/cyan/rosa) no topo do cartao de dialogo.</li>
+    </ul>
+  </div>
+
+  <!-- 07 - BADGES -->
+  <div class="section page-break" id="badges">
+    <div class="section-num">07</div>
+    <h2>Conquistas e Badges</h2>
+    <p>O sistema de <strong>gamificacao</strong> recompensa voce com badges conforme avanca no aprendizado. Existem <strong>8 badges</strong> para desbloquear:</p>
+
+    <table class="badge-table">
+      <thead>
+        <tr><th></th><th>Badge</th><th>Como Desbloquear</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>&#127793;</td><td><strong>Primeira Palavra</strong></td><td>Traduza sua primeira frase</td></tr>
+        <tr><td>&#128269;</td><td><strong>Curioso</strong></td><td>Experimente 3 idiomas diferentes</td></tr>
+        <tr><td>&#11088;</td><td><strong>Missao Cumprida</strong></td><td>Complete uma missao inteira (6 frases)</td></tr>
+        <tr><td>&#128218;</td><td><strong>Estudioso</strong></td><td>Traduza 15 frases no total</td></tr>
+        <tr><td>&#127757;</td><td><strong>Poliglota</strong></td><td>Experimente 6 idiomas diferentes</td></tr>
+        <tr><td>&#128142;</td><td><strong>Cacador de XP</strong></td><td>Acumule 500 XP no total</td></tr>
+        <tr><td>&#9992;&#65039;</td><td><strong>Viajante Mundial</strong></td><td>Experimente 10 idiomas</td></tr>
+        <tr><td>&#128081;</td><td><strong>Lenda</strong></td><td>Desbloqueie todos os outros 7 badges</td></tr>
+      </tbody>
+    </table>
+
+    <h3>O que acontece ao desbloquear um badge?</h3>
+    <ol>
+      <li>Uma <strong>tela especial</strong> aparece com a mensagem "Conquista Desbloqueada!"</li>
+      <li><strong>Confetes coloridos</strong> caem pela tela em animacao.</li>
+      <li>Um <strong>efeito sonoro</strong> de arpejo musical toca (C5-E5-G5-C6).</li>
+      <li>O badge muda de <strong>cinza/trancado</strong> para <strong>colorido/desbloqueado</strong> no grid.</li>
+      <li>Toque em <kbd>Continuar</kbd> para fechar a tela e seguir aprendendo.</li>
+    </ol>
+
+    <h3>Barra de progresso dos badges</h3>
+    <p>Cada badge trancado mostra uma <strong>barra de progresso</strong> indicando o quanto falta para desbloquea-lo. Por exemplo, se voce precisa de 6 idiomas para "Poliglota" e ja usou 3, a barra estara em 50%.</p>
+
+    <div class="info-box tip">
+      <span class="icon">&#128190;</span>
+      <div>Seu progresso e salvo automaticamente no navegador (localStorage). Mesmo fechando e abrindo o app, seus badges e XP sao preservados!</div>
+    </div>
+  </div>
+
+  <!-- 08 - STATS -->
+  <div class="section" id="stats">
+    <div class="section-num">08</div>
+    <h2>Estatisticas e Progresso</h2>
+    <p>Na parte superior do app, tres cartoes mostram suas estatisticas:</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon" style="color: var(--warning);">7</div>
+        <div class="feature-name">Streak</div>
+        <div class="feature-desc">Quantos dias seguidos voce praticou</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon" style="color: var(--purple);">240</div>
+        <div class="feature-name">XP Hoje</div>
+        <div class="feature-desc">Pontos de experiencia ganhos hoje</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon" style="color: var(--ink);">186</div>
+        <div class="feature-name">Palavras</div>
+        <div class="feature-desc">Total de palavras aprendidas</div>
+      </div>
+    </div>
+
+    <h3>Como ganhar XP</h3>
+    <ul>
+      <li>Cada frase traduzida: <strong>+10 XP</strong></li>
+      <li>Missao completa: <strong>+50 XP</strong></li>
+      <li>Animacao especial quando XP aumenta (numero pulsa em verde)</li>
+    </ul>
+  </div>
+
+  <!-- 09 - SONS -->
+  <div class="section" id="sons">
+    <div class="section-num">09</div>
+    <h2>Efeitos Sonoros</h2>
+    <p>O app possui 3 efeitos sonoros gerados por IA (Web Audio API), sem necessidade de arquivos externos:</p>
+
+    <table class="badge-table">
+      <thead>
+        <tr><th>Acao</th><th>Som</th><th>Descricao</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Traduzir frase</td><td>&#128276; Ping</td><td>Som agudo rapido (A5 para E6, 150ms)</td></tr>
+        <tr><td>Desbloquear badge</td><td>&#10024; Arpejo</td><td>Notas C5-E5-G5-C6 com brilho (800ms)</td></tr>
+        <tr><td>Completar missao</td><td>&#127930; Fanfarra</td><td>Sequencia G4-C5-E5-G5-C6 triunfal (1s)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="info-box info">
+      <span class="icon">&#128264;</span>
+      <div>Os sons sao gerados em tempo real pelo navegador. Nao precisa de arquivos de audio! Funcionam em qualquer navegador moderno.</div>
+    </div>
+  </div>
+
+  <!-- 10 - DARK MODE -->
+  <div class="section" id="dark">
+    <div class="section-num">10</div>
+    <h2>Modo Escuro e Acessibilidade</h2>
+
+    <h3>Modo escuro automatico</h3>
+    <p>O app detecta automaticamente a preferencia de tema do seu celular/computador. Se voce usa modo escuro no sistema, o Lingua Rapida muda para um tema escuro com fundo roxo profundo (#0F0B21).</p>
+
+    <h3>Acessibilidade</h3>
+    <ul>
+      <li><strong>Reducao de movimento</strong> — Se voce ativou "Reduzir Movimento" no seu dispositivo, todas as animacoes sao desativadas automaticamente para conforto visual e economia de bateria.</li>
+      <li><strong>Touch targets</strong> — Todos os botoes e areas tocaveis tem no minimo 44px de altura, seguindo as diretrizes da Apple e Google.</li>
+      <li><strong>Safe areas</strong> — O app respeita as areas seguras de celulares com notch (iPhone) e Dynamic Island.</li>
+    </ul>
+  </div>
+
+  <!-- 11 - DICAS -->
+  <div class="section" id="dicas">
+    <div class="section-num">11</div>
+    <h2>Dicas para Aprender Mais Rapido</h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Pratique todos os dias</div>
+          <div class="step-desc">Consistencia e mais importante que quantidade. 15 minutos por dia e melhor que 2 horas uma vez por semana.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Leia em voz alta</div>
+          <div class="step-desc">Ao ver uma frase no idioma estrangeiro, tente pronuncia-la em voz alta antes de ver a traducao.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Tente adivinhar primeiro</div>
+          <div class="step-desc">Antes de tocar para traduzir, tente adivinhar o significado. Isso ativa a memoria de longo prazo.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Explore varios idiomas</div>
+          <div class="step-desc">Comparar idiomas ajuda a identificar padroes. Espanhol e italiano, por exemplo, tem muitas palavras parecidas.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num"></div>
+        <div class="step-content">
+          <div class="step-title">Cace os badges!</div>
+          <div class="step-desc">Use os badges como motivacao. Tente desbloquear o badge "Lenda" completando todas as conquistas.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 - FAQ -->
+  <div class="section" id="faq">
+    <div class="section-num">12</div>
+    <h2>Perguntas Frequentes</h2>
+
+    <h3>Precisa de internet para usar?</h3>
+    <p>Nao! O app funciona 100% offline. Basta abrir o arquivo HTML no navegador.</p>
+
+    <h3>Meu progresso e salvo?</h3>
+    <p>Sim. Badges, XP, idiomas usados e frases traduzidas sao salvos automaticamente no <strong>localStorage</strong> do navegador. Seus dados ficam no seu dispositivo.</p>
+
+    <h3>Como apago meu progresso?</h3>
+    <p>Limpe os dados do navegador (cache e cookies) ou abra o console do navegador (F12) e digite: <kbd>localStorage.clear()</kbd></p>
+
+    <h3>Funciona no celular?</h3>
+    <p>Sim! O app e totalmente responsivo, com design otimizado para telas de 320px ate telas grandes. Suporta notch, Dynamic Island e modo paisagem.</p>
+
+    <h3>Posso imprimir este manual?</h3>
+    <p>Sim! Clique no botao "Imprimir" no canto inferior direito ou use <kbd>Ctrl</kbd> + <kbd>P</kbd>.</p>
+
+    <h3>Os sons nao tocam, o que faco?</h3>
+    <p>Alguns navegadores bloqueiam audio ate que voce interaja com a pagina. Toque em qualquer lugar primeiro e depois tente novamente.</p>
+  </div>
+
+  <!-- RODAPE -->
+  <footer class="manual-footer">
+    <div class="brand">Lingua Rapida</div>
+    <p>Manual de Instrucoes — Versao 1.0</p>
+    <p>Desenvolvido com IA por Gerson Fernandes</p>
+    <p>Julho 2026</p>
+  </footer>
+
+</div>
+
+<!-- BOTAO IMPRIMIR -->
+<button class="print-btn no-print" onclick="window.print()">
+  &#128424; Imprimir
+</button>
+
+<!-- LUNA TOGGLE -->
+<button class="luna-toggle no-print" id="luna-toggle" onclick="openPlayer()" title="Luna narra o manual">
+  &#127908;
+</button>
+
+<!-- LUNA VOICE PLAYER -->
+<div class="luna-player hidden no-print" id="luna-player">
+  <div class="luna-player-inner">
+    <div class="luna-player-top">
+      <div class="luna-player-face" id="luna-face">
+        <img alt="Luna" src="luna-avatar.png" onerror="this.style.display='none'">
+        <div class="speak-ring"></div>
+      </div>
+      <div class="luna-player-info">
+        <div class="luna-player-title" id="luna-narr-title">Luna narra o manual</div>
+        <div class="luna-player-section" id="luna-narr-section">Escolha o idioma e aperte play</div>
+      </div>
+      <button class="luna-player-close" onclick="closePlayer()">&#10005;</button>
+    </div>
+    <div class="luna-player-controls">
+      <select class="luna-lang-select" id="luna-lang" onchange="onLangChange()">
+        <option value="pt-BR">&#127463;&#127479; Portugues</option>
+        <option value="en-US">&#127468;&#127463; English</option>
+        <option value="es-ES">&#127466;&#127480; Espanol</option>
+        <option value="fr-FR">&#127467;&#127479; Francais</option>
+        <option value="it-IT">&#127470;&#127481; Italiano</option>
+        <option value="de-DE">&#127465;&#127466; Deutsch</option>
+        <option value="ja-JP">&#127471;&#127477; Japanese</option>
+        <option value="zh-CN">&#127464;&#127475; Chinese</option>
+        <option value="ru-RU">&#127479;&#127482; Russian</option>
+        <option value="ko-KR">&#127472;&#127479; Korean</option>
+        <option value="ar-SA">&#127480;&#127462; Arabic</option>
+        <option value="hi-IN">&#127470;&#127475; Hindi</option>
+        <option value="tr-TR">&#127481;&#127479; Turkce</option>
+      </select>
+      <button class="luna-btn" onclick="prevSection()" title="Anterior">&#9664;</button>
+      <button class="luna-btn play-btn" id="luna-play" onclick="togglePlay()" title="Play/Pause">&#9654;</button>
+      <button class="luna-btn" onclick="nextSection()" title="Proximo">&#9654;</button>
+    </div>
+    <div class="luna-progress">
+      <div class="luna-progress-fill" id="luna-progress"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========= NARRATION DATA — 13 LANGUAGES =========
+const narrations = {
+  'pt-BR': [
+    'Bem-vindo ao manual do Lingua Rapida! Eu sou a Luna, sua tutora de inteligencia artificial. Vou te guiar por todas as funcoes do aplicativo.',
+    'Para comecar, basta abrir o arquivo lingua rapida ponto html no navegador do seu celular ou computador. Escolha um idioma, comece a missao e toque nas frases para traduzir. E simples assim!',
+    'Eu sou a Luna, sua tutora pessoal de I.A. Apareco em dois lugares do app: na secao Conheca a Luna, com meu rosto e o badge I.A. Ativa, e no simulador de dialogo como sua parceira de conversa. Quando voce traduz uma frase, eu falo junto com voce!',
+    'O Lingua Rapida oferece treze idiomas para voce aprender: Ingles, Espanhol, Frances, Italiano, Alemao, Japones, Mandarim, Russo, Coreano, Arabe, Hindi, Portugues e Turco. Cada idioma tem uma missao tematica com situacoes reais.',
+    'Cada idioma tem uma missao do dia com seis frases essenciais. A missao tem um tema como restaurante ou cafe, uma barra de progresso que se preenche, e voce ganha cinquenta pontos de experiencia ao completar.',
+    'O simulador de dialogo e a parte principal. Cada cartao mostra uma frase no idioma estrangeiro. Toque no cartao para revelar a traducao em portugues. Um som toca e um check verde aparece confirmando.',
+    'O app tem oito badges para voce colecionar! Primeira Palavra, Curioso, Missao Cumprida, Estudioso, Poliglota, Cacador de XP, Viajante Mundial e Lenda. Ao desbloquear um badge, uma tela especial aparece com confetes e um som de arpejo!',
+    'Acompanhe suas estatisticas em tres cartoes: Streak mostra quantos dias seguidos voce praticou, XP mostra seus pontos de experiencia do dia, e Palavras mostra o total de palavras aprendidas.',
+    'O app tem tres efeitos sonoros gerados automaticamente: um ping ao traduzir frases, um arpejo musical ao desbloquear badges, e uma fanfarra ao completar missoes.',
+    'O app detecta automaticamente se voce usa modo escuro no celular e se adapta. Tambem respeita a opcao de reduzir movimento para acessibilidade e economia de bateria.',
+    'Minhas dicas para aprender mais rapido: pratique todos os dias, mesmo que por quinze minutos. Leia as frases em voz alta. Tente adivinhar antes de ver a traducao. Explore varios idiomas e cace todos os badges!',
+    'Perguntas frequentes: o app funciona cem por cento offline. Seu progresso e salvo automaticamente no navegador. Funciona no celular e no computador. E voce pode imprimir este manual clicando no botao Imprimir.'
+  ],
+  'en-US': [
+    'Welcome to the Lingua Rapida manual! I am Luna, your artificial intelligence tutor. I will guide you through all the app features.',
+    'To get started, simply open the lingua rapida HTML file in your phone or computer browser. Choose a language, start the mission, and tap on phrases to translate. It is that simple!',
+    'I am Luna, your personal A.I. tutor. I appear in two places: in the Meet Luna section with my photo and the A.I. Active badge, and in the dialogue simulator as your conversation partner.',
+    'Lingua Rapida offers thirteen languages: English, Spanish, French, Italian, German, Japanese, Mandarin, Russian, Korean, Arabic, Hindi, Portuguese and Turkish. Each language has a themed mission with real-life situations.',
+    'Each language has a daily mission with six essential phrases. The mission has a theme like restaurant or cafe, a progress bar that fills up, and you earn fifty experience points when you complete it.',
+    'The dialogue simulator is the main feature. Each card shows a phrase in the foreign language. Tap the card to reveal the Portuguese translation. A sound plays and a green check appears.',
+    'The app has eight badges to collect! First Word, Curious, Mission Complete, Scholar, Polyglot, XP Hunter, World Traveler and Legend. When you unlock a badge, a special screen appears with confetti and a musical sound!',
+    'Track your stats in three cards: Streak shows consecutive practice days, XP shows today\'s experience points, and Words shows total words learned.',
+    'The app has three automatically generated sound effects: a ping when translating phrases, a musical arpeggio when unlocking badges, and a fanfare when completing missions.',
+    'The app automatically detects if you use dark mode on your phone and adapts. It also respects the reduce motion setting for accessibility and battery saving.',
+    'My tips for faster learning: practice every day, even for just fifteen minutes. Read phrases out loud. Try to guess before seeing the translation. Explore multiple languages and chase all the badges!',
+    'Frequently asked questions: the app works one hundred percent offline. Your progress is saved automatically in the browser. It works on phones and computers. And you can print this manual by clicking the Print button.'
+  ],
+  'es-ES': [
+    'Bienvenido al manual de Lingua Rapida! Soy Luna, tu tutora de inteligencia artificial. Te guiare por todas las funciones de la aplicacion.',
+    'Para empezar, simplemente abre el archivo HTML en el navegador de tu telefono o computadora. Elige un idioma, comienza la mision y toca las frases para traducir. Asi de facil!',
+    'Soy Luna, tu tutora personal de inteligencia artificial. Aparezco en dos lugares: en la seccion Conoce a Luna con mi foto, y en el simulador de dialogo como tu companera de conversacion.',
+    'Lingua Rapida ofrece trece idiomas: ingles, espanol, frances, italiano, aleman, japones, mandarin, ruso, coreano, arabe, hindi, portugues y turco. Cada idioma tiene una mision tematica.',
+    'Cada idioma tiene una mision del dia con seis frases esenciales. La mision tiene un tema como restaurante o cafe, una barra de progreso, y ganas cincuenta puntos de experiencia al completarla.',
+    'El simulador de dialogo es la parte principal. Cada tarjeta muestra una frase en el idioma extranjero. Toca la tarjeta para revelar la traduccion. Un sonido suena y aparece una marca verde.',
+    'La app tiene ocho insignias para coleccionar! Primera Palabra, Curioso, Mision Cumplida, Estudioso, Poliglota, Cazador de XP, Viajero Mundial y Leyenda. Al desbloquear una insignia, aparece una pantalla especial con confeti!',
+    'Sigue tus estadisticas en tres tarjetas: Racha muestra dias consecutivos, XP muestra los puntos del dia, y Palabras muestra el total aprendido.',
+    'La app tiene tres efectos de sonido generados automaticamente: un ping al traducir, un arpegio al desbloquear insignias, y una fanfarria al completar misiones.',
+    'La app detecta automaticamente si usas modo oscuro y se adapta. Tambien respeta la opcion de reducir movimiento para accesibilidad.',
+    'Mis consejos: practica todos los dias, aunque solo sean quince minutos. Lee las frases en voz alta. Intenta adivinar antes de ver la traduccion. Explora varios idiomas y consigue todas las insignias!',
+    'Preguntas frecuentes: la app funciona cien por ciento sin conexion. Tu progreso se guarda automaticamente. Funciona en telefonos y computadoras. Y puedes imprimir este manual.'
+  ],
+  'fr-FR': [
+    'Bienvenue dans le manuel de Lingua Rapida! Je suis Luna, votre tutrice d\'intelligence artificielle. Je vais vous guider a travers toutes les fonctionnalites.',
+    'Pour commencer, ouvrez simplement le fichier HTML dans votre navigateur. Choisissez une langue, commencez la mission et touchez les phrases pour traduire.',
+    'Je suis Luna, votre tutrice personnelle. J\'apparais a deux endroits: dans la section Decouvrez Luna, et dans le simulateur de dialogue comme partenaire de conversation.',
+    'Lingua Rapida propose treize langues: anglais, espagnol, francais, italien, allemand, japonais, mandarin, russe, coreen, arabe, hindi, portugais et turc.',
+    'Chaque langue a une mission du jour avec six phrases essentielles. La mission a un theme, une barre de progression, et vous gagnez cinquante points d\'experience.',
+    'Le simulateur de dialogue est la partie principale. Chaque carte montre une phrase. Touchez pour reveler la traduction. Un son retentit et une coche verte apparait.',
+    'L\'application a huit badges a collectionner! Premier Mot, Curieux, Mission Accomplie, Studieux, Polyglotte, Chasseur d\'XP, Voyageur Mondial et Legende!',
+    'Suivez vos statistiques: Serie de jours consecutifs, XP du jour, et total de mots appris.',
+    'L\'application a trois effets sonores generes automatiquement: un ping, un arpege musical, et une fanfare.',
+    'L\'application detecte automatiquement le mode sombre et s\'adapte. Elle respecte aussi l\'option de reduction de mouvement.',
+    'Mes conseils: pratiquez tous les jours. Lisez a voix haute. Essayez de deviner avant de voir la traduction. Explorez plusieurs langues!',
+    'Questions frequentes: l\'application fonctionne hors ligne. Votre progression est sauvegardee automatiquement. Vous pouvez imprimer ce manuel.'
+  ],
+  'it-IT': [
+    'Benvenuto nel manuale di Lingua Rapida! Sono Luna, la tua tutrice di intelligenza artificiale. Ti guidero attraverso tutte le funzionalita.',
+    'Per iniziare, apri semplicemente il file HTML nel browser. Scegli una lingua, inizia la missione e tocca le frasi per tradurre.',
+    'Sono Luna, la tua tutrice personale. Appaio in due posti: nella sezione Conosci Luna, e nel simulatore di dialogo.',
+    'Lingua Rapida offre tredici lingue: inglese, spagnolo, francese, italiano, tedesco, giapponese, mandarino, russo, coreano, arabo, hindi, portoghese e turco.',
+    'Ogni lingua ha una missione del giorno con sei frasi essenziali. La missione ha un tema, una barra di progresso e guadagni cinquanta punti esperienza.',
+    'Il simulatore di dialogo e la parte principale. Ogni carta mostra una frase. Toccala per rivelare la traduzione.',
+    'L\'app ha otto badge da collezionare! Prima Parola, Curioso, Missione Compiuta, Studioso, Poliglotta, Cacciatore di XP, Viaggiatore Mondiale e Leggenda!',
+    'Segui le tue statistiche: serie consecutiva, XP del giorno e totale parole imparate.',
+    'L\'app ha tre effetti sonori generati automaticamente: un ping, un arpeggio e una fanfara.',
+    'L\'app rileva automaticamente la modalita scura e si adatta.',
+    'I miei consigli: pratica ogni giorno. Leggi ad alta voce. Prova a indovinare prima di vedere la traduzione.',
+    'Domande frequenti: l\'app funziona offline. Il progresso viene salvato automaticamente.'
+  ],
+  'de-DE': [
+    'Willkommen zum Lingua Rapida Handbuch! Ich bin Luna, deine Tutoring-KI. Ich fuehre dich durch alle Funktionen der App.',
+    'Um zu beginnen, oeffne einfach die HTML-Datei in deinem Browser. Waehle eine Sprache, starte die Mission und tippe auf Saetze zum Uebersetzen.',
+    'Ich bin Luna, deine persoenliche KI-Tutorin. Ich erscheine an zwei Stellen: im Bereich Lerne Luna kennen und im Dialog-Simulator.',
+    'Lingua Rapida bietet dreizehn Sprachen: Englisch, Spanisch, Franzoesisch, Italienisch, Deutsch, Japanisch, Mandarin, Russisch, Koreanisch, Arabisch, Hindi, Portugiesisch und Tuerkisch.',
+    'Jede Sprache hat eine Tagesmission mit sechs wichtigen Saetzen. Die Mission hat ein Thema, einen Fortschrittsbalken und du verdienst fuenfzig Erfahrungspunkte.',
+    'Der Dialog-Simulator ist das Hauptfeature. Jede Karte zeigt einen Satz. Tippe darauf um die Uebersetzung zu sehen.',
+    'Die App hat acht Abzeichen zum Sammeln! Erstes Wort, Neugierig, Mission Erfuellt, Fleissig, Polyglott, XP-Jaeger, Weltreisender und Legende!',
+    'Verfolge deine Statistiken: Streak zeigt aufeinanderfolgende Tage, XP zeigt die heutigen Punkte, und Woerter zeigt das Gesamte.',
+    'Die App hat drei automatisch generierte Soundeffekte: einen Ping, ein Arpeggio und eine Fanfare.',
+    'Die App erkennt automatisch den Dunkelmodus und passt sich an.',
+    'Meine Tipps: Uebe jeden Tag. Lies laut vor. Versuche zu raten bevor du die Uebersetzung siehst.',
+    'Haeufige Fragen: Die App funktioniert komplett offline. Dein Fortschritt wird automatisch gespeichert.'
+  ],
+  'ja-JP': [
+    'リングア・ラピダのマニュアルへようこそ！私はルナ、あなたのAIチューターです。アプリの全機能をご案内します。',
+    '始めるには、HTMLファイルをブラウザで開くだけです。言語を選び、ミッションを始め、フレーズをタップして翻訳しましょう。',
+    '私はルナ、あなた専属のAIチューターです。アプリの二か所に登場します：ルナ紹介セクションと、会話シミュレーターです。',
+    'リングア・ラピダは十三の言語を提供しています：英語、スペイン語、フランス語、イタリア語、ドイツ語、日本語、中国語、ロシア語、韓国語、アラビア語、ヒンディー語、ポルトガル語、トルコ語です。',
+    '各言語にはデイリーミッションがあり、六つの重要なフレーズがあります。完了すると五十経験値を獲得できます。',
+    '会話シミュレーターがメイン機能です。カードをタップすると翻訳が表示されます。',
+    'アプリには八つのバッジがあります！初めての言葉、好奇心、ミッション完了、勉強家、ポリグロット、XPハンター、世界旅行者、レジェンドです！',
+    '統計を三つのカードで確認できます：連続日数、今日のXP、学んだ単語の合計です。',
+    'アプリには三つの効果音があります：翻訳時のピン、バッジ解除時のアルペジオ、ミッション完了時のファンファーレです。',
+    'アプリはダークモードを自動検出して適応します。',
+    'アドバイス：毎日練習しましょう。声に出して読みましょう。翻訳を見る前に推測してみましょう。',
+    'よくある質問：アプリは完全オフラインで動作します。進捗は自動保存されます。'
+  ],
+  'zh-CN': [
+    '欢迎阅读Lingua Rapida使用手册！我是Luna，你的人工智能导师。我将带你了解应用的所有功能。',
+    '开始使用很简单，只需在浏览器中打开HTML文件。选择一种语言，开始任务，点击短语进行翻译。',
+    '我是Luna，你的专属AI导师。我出现在两个地方：认识Luna区域和对话模拟器中。',
+    'Lingua Rapida提供十三种语言：英语、西班牙语、法语、意大利语、德语、日语、中文、俄语、韩语、阿拉伯语、印地语、葡萄牙语和土耳其语。',
+    '每种语言都有每日任务，包含六个基本短语。完成后可获得五十经验值。',
+    '对话模拟器是主要功能。每张卡片显示一个外语短语。点击卡片查看翻译。',
+    '应用有八个徽章可以收集！第一个词、好奇心、任务完成、学者、多语者、经验猎人、世界旅行者和传奇！',
+    '通过三张卡片跟踪统计：连续天数、今日经验值和学习的单词总数。',
+    '应用有三种自动生成的音效：翻译时的提示音、解锁徽章时的琶音和完成任务时的号角声。',
+    '应用会自动检测深色模式并适应。',
+    '建议：每天练习。大声朗读。在看翻译前尝试猜测。探索多种语言！',
+    '常见问题：应用百分之百离线工作。进度自动保存。支持手机和电脑。'
+  ],
+  'ru-RU': [
+    'Добро пожаловать в руководство Lingua Rapida! Я Луна, ваш репетитор с искусственным интеллектом.',
+    'Чтобы начать, просто откройте HTML файл в браузере. Выберите язык, начните миссию и нажимайте на фразы для перевода.',
+    'Я Луна, ваш персональный репетитор. Я появляюсь в двух местах приложения.',
+    'Lingua Rapida предлагает тринадцать языков для изучения.',
+    'Каждый язык имеет ежедневную миссию с шестью фразами. За выполнение вы получаете пятьдесят очков опыта.',
+    'Симулятор диалога - главная функция. Нажмите на карточку чтобы увидеть перевод.',
+    'В приложении восемь значков для коллекции! Первое Слово, Любопытный, Миссия Выполнена, Прилежный, Полиглот, Охотник за Опытом, Путешественник и Легенда!',
+    'Отслеживайте статистику: серия дней, опыт за сегодня и общее количество слов.',
+    'Приложение имеет три звуковых эффекта: пинг, арпеджио и фанфары.',
+    'Приложение автоматически определяет тёмный режим.',
+    'Советы: практикуйтесь каждый день. Читайте вслух. Пробуйте угадать перед переводом.',
+    'Часто задаваемые вопросы: приложение работает полностью офлайн. Прогресс сохраняется автоматически.'
+  ],
+  'ko-KR': [
+    'Lingua Rapida 매뉴얼에 오신 것을 환영합니다! 저는 루나, 당신의 AI 튜터입니다.',
+    '시작하려면 브라우저에서 HTML 파일을 열기만 하면 됩니다. 언어를 선택하고 미션을 시작하세요.',
+    '저는 루나, 당신의 개인 AI 튜터입니다. 앱의 두 곳에 나타납니다.',
+    'Lingua Rapida는 열세 가지 언어를 제공합니다.',
+    '각 언어에는 여섯 개의 필수 문구가 포함된 일일 미션이 있습니다. 완료하면 오십 경험치를 얻습니다.',
+    '대화 시뮬레이터가 주요 기능입니다. 카드를 탭하면 번역이 표시됩니다.',
+    '앱에는 수집할 수 있는 여덟 개의 배지가 있습니다!',
+    '세 개의 카드로 통계를 추적하세요: 연속 일수, 오늘의 경험치, 학습한 단어 수.',
+    '앱에는 세 가지 효과음이 있습니다.',
+    '앱은 다크 모드를 자동으로 감지합니다.',
+    '팁: 매일 연습하세요. 소리 내어 읽으세요. 번역을 보기 전에 추측해 보세요.',
+    '자주 묻는 질문: 앱은 완전히 오프라인으로 작동합니다.'
+  ],
+  'ar-SA': [
+    'مرحباً بك في دليل لينغوا رابيدا! أنا لونا، معلمتك بالذكاء الاصطناعي.',
+    'للبدء، افتح ملف HTML في المتصفح. اختر لغة، ابدأ المهمة، واضغط على العبارات للترجمة.',
+    'أنا لونا، معلمتك الشخصية. أظهر في مكانين في التطبيق.',
+    'يقدم لينغوا رابيدا ثلاث عشرة لغة للتعلم.',
+    'كل لغة لها مهمة يومية بست عبارات أساسية. تكسب خمسين نقطة خبرة عند الانتهاء.',
+    'محاكي الحوار هو الميزة الرئيسية. اضغط على البطاقة لرؤية الترجمة.',
+    'التطبيق يحتوي على ثمانية شارات للجمع!',
+    'تابع إحصائياتك: أيام متتالية، نقاط الخبرة، وإجمالي الكلمات.',
+    'التطبيق يحتوي على ثلاثة مؤثرات صوتية.',
+    'التطبيق يكتشف الوضع المظلم تلقائياً.',
+    'نصائحي: تدرب كل يوم. اقرأ بصوت عالٍ. حاول التخمين قبل رؤية الترجمة.',
+    'أسئلة شائعة: التطبيق يعمل بدون إنترنت. يتم حفظ تقدمك تلقائياً.'
+  ],
+  'hi-IN': [
+    'Lingua Rapida मैनुअल में आपका स्वागत है! मैं लूना हूँ, आपकी AI ट्यूटर।',
+    'शुरू करने के लिए, ब्राउज़र में HTML फ़ाइल खोलें। भाषा चुनें, मिशन शुरू करें और वाक्यों पर टैप करें।',
+    'मैं लूना हूँ, आपकी व्यक्तिगत AI ट्यूटर। मैं ऐप में दो जगह दिखाई देती हूँ।',
+    'Lingua Rapida तेरह भाषाएँ प्रदान करता है।',
+    'हर भाषा में छह आवश्यक वाक्यों वाला दैनिक मिशन है। पूरा करने पर पचास अनुभव अंक मिलते हैं।',
+    'संवाद सिम्युलेटर मुख्य विशेषता है। कार्ड पर टैप करें अनुवाद देखने के लिए।',
+    'ऐप में इकट्ठा करने के लिए आठ बैज हैं!',
+    'तीन कार्ड में अपने आँकड़े ट्रैक करें।',
+    'ऐप में तीन ध्वनि प्रभाव हैं।',
+    'ऐप स्वचालित रूप से डार्क मोड का पता लगाता है।',
+    'सुझाव: हर दिन अभ्यास करें। ज़ोर से पढ़ें। अनुवाद देखने से पहले अनुमान लगाएँ।',
+    'अक्सर पूछे जाने वाले प्रश्न: ऐप पूरी तरह ऑफ़लाइन काम करता है।'
+  ],
+  'tr-TR': [
+    'Lingua Rapida kilavuzuna hosgeldiniz! Ben Luna, yapay zeka ogretmeninizim.',
+    'Baslamak icin HTML dosyasini tarayicinizda acin. Bir dil secin, gorevi baslatin ve cumlelere dokunarak cevirini gorun.',
+    'Ben Luna, kisisel yapay zeka ogretmeninizim. Uygulamada iki yerde gorunuyorum.',
+    'Lingua Rapida on uc dil sunuyor.',
+    'Her dilin alti temel cumleden olusan gunluk gorevi var. Tamamladiginda elli deneyim puani kazanirsin.',
+    'Diyalog simulatoru ana ozelliktir. Ceviriyi gormek icin karta dokunun.',
+    'Uygulamada toplanacak sekiz rozet var!',
+    'Istatistiklerinizi uc kartta takip edin.',
+    'Uygulamada uc ses efekti var.',
+    'Uygulama karanlik modu otomatik olarak algilar.',
+    'Ipuclari: her gun pratik yapin. Yuksek sesle okuyun. Ceviriyi gormeden once tahmin etmeye calisin.',
+    'Sik sorulan sorular: uygulama tamamen cevrimdisi calisir. Ilerlemeniz otomatik olarak kaydedilir.'
+  ]
+};
+
+const sectionNames = {
+  'pt-BR': ['Introducao','Como Comecar','Tutora Luna','Idiomas','Missao do Dia','Simulador','Badges','Estatisticas','Sons','Modo Escuro','Dicas','FAQ'],
+  'en-US': ['Introduction','Getting Started','Tutor Luna','Languages','Daily Mission','Simulator','Badges','Statistics','Sounds','Dark Mode','Tips','FAQ'],
+  'es-ES': ['Introduccion','Como Empezar','Tutora Luna','Idiomas','Mision del Dia','Simulador','Insignias','Estadisticas','Sonidos','Modo Oscuro','Consejos','FAQ'],
+  'fr-FR': ['Introduction','Commencer','Tutrice Luna','Langues','Mission du Jour','Simulateur','Badges','Statistiques','Sons','Mode Sombre','Conseils','FAQ'],
+  'it-IT': ['Introduzione','Iniziare','Tutrice Luna','Lingue','Missione','Simulatore','Badge','Statistiche','Suoni','Modo Scuro','Consigli','FAQ'],
+  'de-DE': ['Einfuehrung','Loslegen','Tutorin Luna','Sprachen','Tagesmission','Simulator','Abzeichen','Statistiken','Sounds','Dunkelmodus','Tipps','FAQ'],
+  'ja-JP': ['紹介','始め方','ルナ先生','言語','デイリーミッション','シミュレーター','バッジ','統計','効果音','ダークモード','ヒント','FAQ'],
+  'zh-CN': ['介绍','开始','导师Luna','语言','每日任务','模拟器','徽章','统计','音效','深色模式','建议','常见问题'],
+  'ru-RU': ['Введение','Начало','Репетитор Луна','Языки','Миссия дня','Симулятор','Значки','Статистика','Звуки','Тёмный режим','Советы','FAQ'],
+  'ko-KR': ['소개','시작하기','튜터 루나','언어','일일 미션','시뮬레이터','배지','통계','효과음','다크 모드','팁','FAQ'],
+  'ar-SA': ['مقدمة','البداية','المعلمة لونا','اللغات','المهمة اليومية','المحاكي','الشارات','الإحصائيات','الأصوات','الوضع المظلم','نصائح','أسئلة شائعة'],
+  'hi-IN': ['परिचय','शुरुआत','ट्यूटर लूना','भाषाएँ','दैनिक मिशन','सिम्युलेटर','बैज','आँकड़े','ध्वनि','डार्क मोड','सुझाव','FAQ'],
+  'tr-TR': ['Giris','Baslangi','Ogretmen Luna','Diller','Gunluk Gorev','Simulato','Rozetler','Istatistikler','Sesler','Karanlik Mod','Ipuclari','SSS']
+};
+
+// ========= PLAYER STATE =========
+let currentSection = 0;
+let isPlaying = false;
+let speechUtterance = null;
+
+function openPlayer() {
+  document.getElementById('luna-player').classList.remove('hidden');
+  document.getElementById('luna-toggle').classList.add('active');
+}
+
+function closePlayer() {
+  stopSpeech();
+  document.getElementById('luna-player').classList.add('hidden');
+  document.getElementById('luna-toggle').classList.remove('active');
+}
+
+function onLangChange() {
+  stopSpeech();
+  currentSection = 0;
+  updatePlayerUI();
+}
+
+function getLang() {
+  return document.getElementById('luna-lang').value;
+}
+
+function updatePlayerUI() {
+  const lang = getLang();
+  const names = sectionNames[lang] || sectionNames['en-US'];
+  const name = names[currentSection] || '';
+  const total = 12;
+  document.getElementById('luna-narr-title').textContent = name;
+  document.getElementById('luna-narr-section').textContent = (currentSection + 1) + ' / ' + total;
+  document.getElementById('luna-progress').style.width = ((currentSection + 1) / total * 100) + '%';
+  // Scroll manual to matching section
+  const sections = document.querySelectorAll('.section');
+  if (sections[currentSection]) {
+    sections[currentSection].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function togglePlay() {
+  if (isPlaying) {
+    stopSpeech();
+  } else {
+    speakCurrent();
+  }
+}
+
+function speakCurrent() {
+  const lang = getLang();
+  const texts = narrations[lang] || narrations['en-US'];
+  const text = texts[currentSection];
+  if (!text) return;
+
+  stopSpeech();
+  speechUtterance = new SpeechSynthesisUtterance(text);
+  speechUtterance.lang = lang;
+  speechUtterance.rate = 0.92;
+  speechUtterance.pitch = 1.05;
+
+  // Try to find a female voice
+  const voices = speechSynthesis.getVoices();
+  const langCode = lang.split('-')[0];
+  const femaleVoice = voices.find(v => v.lang.startsWith(langCode) && /female|mulher|mujer|femme|donna|woman/i.test(v.name));
+  const langVoice = voices.find(v => v.lang.startsWith(langCode));
+  if (femaleVoice) speechUtterance.voice = femaleVoice;
+  else if (langVoice) speechUtterance.voice = langVoice;
+
+  speechUtterance.onstart = () => {
+    isPlaying = true;
+    document.getElementById('luna-play').innerHTML = '&#10074;&#10074;';
+    document.getElementById('luna-face').classList.add('speaking');
+  };
+  speechUtterance.onend = () => {
+    isPlaying = false;
+    document.getElementById('luna-play').innerHTML = '&#9654;';
+    document.getElementById('luna-face').classList.remove('speaking');
+    // Auto-advance to next section
+    if (currentSection < 11) {
+      currentSection++;
+      updatePlayerUI();
+      setTimeout(() => speakCurrent(), 800);
+    }
+  };
+  speechUtterance.onerror = () => {
+    isPlaying = false;
+    document.getElementById('luna-play').innerHTML = '&#9654;';
+    document.getElementById('luna-face').classList.remove('speaking');
+  };
+
+  speechSynthesis.speak(speechUtterance);
+  updatePlayerUI();
+}
+
+function stopSpeech() {
+  speechSynthesis.cancel();
+  isPlaying = false;
+  document.getElementById('luna-play').innerHTML = '&#9654;';
+  document.getElementById('luna-face').classList.remove('speaking');
+}
+
+function prevSection() {
+  stopSpeech();
+  currentSection = Math.max(0, currentSection - 1);
+  updatePlayerUI();
+}
+
+function nextSection() {
+  stopSpeech();
+  currentSection = Math.min(11, currentSection + 1);
+  updatePlayerUI();
+}
+
+// Pre-load voices
+speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+if (speechSynthesis.getVoices().length === 0) {
+  speechSynthesis.getVoices();
+}
+</script>
+
+<!-- ========= PROTECAO ANTI-COPIA & ANTI-TAMPERING ========= -->
+<style>
+  body, * {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-touch-callout: none !important;
+  }
+  input, textarea, select, [contenteditable="true"] {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    user-select: text !important;
+  }
+  img, a, * { -webkit-user-drag: none !important; user-drag: none !important; }
+  body::after {
+    content: 'Manual Lingua Rapida \00A9 2026 - Protegido';
+    position: fixed; bottom: -100px; right: -100px;
+    font-size: 8px; opacity: 0; pointer-events: none; z-index: -1;
+  }
+</style>
+<script>
+(function(){
+  'use strict';
+  // Anti-iframe
+  try {
+    if (window.top !== window.self && window.top.location.hostname !== window.self.location.hostname) {
+      window.top.location = window.self.location;
+    }
+  } catch(e) {}
+
+  // Bloqueio clique direito
+  document.addEventListener('contextmenu', function(e) { e.preventDefault(); return false; }, true);
+
+  // Bloqueio de teclas
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); return false; }
+    if (e.ctrlKey && e.shiftKey && /[IJCijc]/.test(e.key)) { e.preventDefault(); return false; }
+    if (e.ctrlKey && /[uUsScCaA]/.test(e.key) && !e.shiftKey) { e.preventDefault(); return false; }
+    if (e.ctrlKey && /[pP]/.test(e.key)) { e.preventDefault(); return false; }
+  }, true);
+
+  // Bloqueio selecao
+  document.addEventListener('selectstart', function(e) {
+    if (!/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) { e.preventDefault(); return false; }
+  }, true);
+
+  // Bloqueio copiar/cortar
+  document.addEventListener('copy', function(e) {
+    e.preventDefault();
+    e.clipboardData && e.clipboardData.setData('text/plain','Conteudo protegido - Lingua Rapida');
+    return false;
+  }, true);
+  document.addEventListener('cut', function(e) { e.preventDefault(); return false; }, true);
+
+  // Bloqueio arrastar
+  document.addEventListener('dragstart', function(e) { e.preventDefault(); return false; }, true);
+  document.addEventListener('drop', function(e) { e.preventDefault(); return false; }, true);
+
+  // Deteccao DevTools (alerta sem destruir)
+  var _dt = { warned: false };
+  setInterval(function() {
+    var t = 200;
+    if ((window.outerHeight - window.innerHeight > t || window.outerWidth - window.innerWidth > t) && !_dt.warned) {
+      _dt.warned = true;
+      console.warn('[PROTECAO] Ferramentas de desenvolvedor detectadas.');
+    }
+  }, 2000);
+
+  // Anti-debug (leve)
+  var _adc = 0;
+  (function _ad() {
+    if (_adc < 3) { try { (function(){}).constructor('debugger')(); } catch(e) {} _adc++; }
+    setTimeout(_ad, 5000);
+  })();
+
+  // Console warning
+  if (typeof console !== 'undefined') {
+    console.log('%c PARE!','color:red;font-size:60px;font-weight:bold;');
+    console.log('%c Este manual e protegido. Copia e engenharia reversa sao proibidas.','color:#333;font-size:16px;');
+    console.log('%c Lingua Rapida - Todos os direitos reservados 2026','color:#7C3AED;font-size:12px;');
+  }
+
+  // Integridade
+  setInterval(function() {
+    if (!document.querySelector('.manual') || !document.querySelector('.cover')) {
+      document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;background:#1E1B4B;color:white;text-align:center;padding:20px"><div><h1 style="font-size:48px;margin-bottom:16px">&#9888;</h1><h2>Arquivo Corrompido</h2><p style="opacity:.7;margin-top:8px">Este manual foi alterado indevidamente.</p></div></div>';
+    }
+  }, 5000);
+
+  // Print screen
+  document.addEventListener('keyup', function(e) {
+    if (e.key === 'PrintScreen') { navigator.clipboard && navigator.clipboard.writeText(''); }
+  });
+
+  // Watermark meta
+  var m = document.createElement('meta');
+  m.name = 'copyright'; m.content = 'Manual Lingua Rapida - Protegido contra copia - 2026';
+  document.head.appendChild(m);
+  var m2 = document.createElement('meta');
+  m2.name = 'author'; m2.content = 'Gerson Fernandes';
+  document.head.appendChild(m2);
+})();
+</script>
+
+</body>
+</html>
